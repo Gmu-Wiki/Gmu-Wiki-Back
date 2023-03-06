@@ -48,28 +48,6 @@ public class SecurityConfig {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    private static final String[] AUTH_WHITELIST = {
-            "/v2/api-docs",
-            "/v3/api-docs/**",
-            "/configuration/ui",
-            "/swagger-resources/**",
-            "/configuration/security",
-            "/swagger-ui.html",
-            "/webjars/**",
-            "/file/**",
-            "/image/**",
-            "/swagger/**",
-            "/swagger-ui/**",
-            "/h2/**"
-    };
-
-    // 정적인 파일 요청에 대해 무시
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() throws Exception {
-
-        return (web) -> web.ignoring().antMatchers(AUTH_WHITELIST);
-    }
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
