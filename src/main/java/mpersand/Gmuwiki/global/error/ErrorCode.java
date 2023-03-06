@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ErrorCode {
+public enum ErrorCode {
 
     ALREADY_EXIST_EMAIL("이미 존재하는 이메일입니다.", 409),
     NOT_SAME_PASSWORD("두 비밀번호가 일치하지 않습니다.", 400),
