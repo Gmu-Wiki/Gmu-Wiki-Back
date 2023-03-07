@@ -3,7 +3,6 @@ package mpersand.Gmuwiki.domain.auth.presentation.dto.request;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import mpersand.Gmuwiki.domain.user.enums.Role;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -27,5 +26,5 @@ public class SignUpRequest {
     private String number;
 
     @NotBlank(message = "역할은 필수 입력 값입니다.")
-    private Role role;
+    private String role;
 }
