@@ -9,7 +9,7 @@ public enum ErrorCode {
 
     ALREADY_EXIST_EMAIL("이미 존재하는 이메일입니다.", 409),
     NOT_SAME_PASSWORD("두 비밀번호가 일치하지 않습니다.", 400),
-    MISMATCH_USER_PASSWORD("비밀번호가 일치하지 않습니다.", 400),
+    MISMATCH_PASSWORD("비밀번호가 일치하지 않습니다.", 400),
     NOT_VERIFY_EMAIL("검증되지 않은 이메일입니다." , 401),
     MANY_REQUEST_EMAIL_AUTH("15분에 최대 3번의 이메일 요청만 가능합니다." , 429),
     EXPIRE_EMAIL_CODE("이메일 인증번호 시간이 만료되었습니다.", 401),

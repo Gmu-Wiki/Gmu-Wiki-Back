@@ -1,7 +1,10 @@
 package mpersand.Gmuwiki.domain.auth.presentation;
 
 import lombok.RequiredArgsConstructor;
+import mpersand.Gmuwiki.domain.auth.presentation.dto.request.LoginRequest;
 import mpersand.Gmuwiki.domain.auth.presentation.dto.request.SignUpRequest;
+import mpersand.Gmuwiki.domain.auth.presentation.dto.response.LoginResponse;
+import mpersand.Gmuwiki.domain.auth.sevice.UserLoginService;
 import mpersand.Gmuwiki.domain.auth.sevice.UserSignUpService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import javax.validation.Valid;
 public class AuthController {
 
     private final UserSignUpService userSignUpService;
+    private final UserLoginService userLoginService;
 
     @PostMapping("/signup")
     public ResponseEntity<Void> signUp(@RequestBody @Valid SignUpRequest signUpRequest) {
@@ -25,5 +29,10 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
+        LoginResponse loginResponse = userLoginService.execute(loginRequest);
+        return new ResponseEntity<>(loginResponse, HttpStatus.OK);
+    }
 
 }

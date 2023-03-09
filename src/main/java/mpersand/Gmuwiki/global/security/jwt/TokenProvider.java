@@ -2,13 +2,13 @@ package mpersand.Gmuwiki.global.security.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.global.security.auth.MemberDetailsService;
 import mpersand.Gmuwiki.global.security.exception.TokenExpirationException;
 import mpersand.Gmuwiki.global.security.exception.TokenNotValidException;
 import mpersand.Gmuwiki.global.security.jwt.properties.JwtProperties;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -22,6 +22,7 @@ import java.util.Date;
 @Component
 @RequiredArgsConstructor
 public class TokenProvider {
+
     private final MemberDetailsService memberDetailsService;
     private final JwtProperties jwtProperties;
     private final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 120;
@@ -42,13 +43,13 @@ public class TokenProvider {
     }
 
     private Key getSignInKey(String secretKey) {
-        byte[] bytes =secretKey.getBytes(StandardCharsets.UTF_8);
+        byte[] bytes = secretKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(bytes);
     }
 
-    private String generateToken(String email, TokenType tokenType, String secret, long expireTime) {
+    private String generateToken(String userEmail, TokenType tokenType, String secret, long expireTime) {
         final Claims claims = Jwts.claims();
-        claims.put(TokenClaimName.USER_EMAIL.value, email);
+        claims.put(TokenClaimName.USER_EMAIL.value, userEmail);
         claims.put(TokenClaimName.TOKEN_TYPE.value, tokenType);
         return Jwts.builder()
                 .setClaims(claims)

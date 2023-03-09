@@ -2,6 +2,7 @@ package mpersand.Gmuwiki.global.error.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import mpersand.Gmuwiki.domain.auth.exception.ExistEmailException;
+import mpersand.Gmuwiki.domain.auth.exception.MisMatchPasswordException;
 import mpersand.Gmuwiki.domain.auth.exception.UserNotFoundException;
 import mpersand.Gmuwiki.global.error.ErrorMessage;
 import mpersand.Gmuwiki.global.security.exception.TokenExpirationException;
@@ -40,6 +41,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ExistEmailException.class)
     public ResponseEntity<ErrorMessage> handleExistEmailException(HttpServletRequest request, ExistEmailException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(MisMatchPasswordException.class)
+    public ResponseEntity<ErrorMessage> handleMisMatchPasswordException(HttpServletRequest request, MisMatchPasswordException e) {
         printError(request, e, e.getErrorCode().getMessage());
         ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
         return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
