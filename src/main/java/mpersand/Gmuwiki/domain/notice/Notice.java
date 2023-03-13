@@ -35,7 +35,7 @@ public class Notice {
     @JoinColumn(name = "email")
     private User user;
 
-    public void modifyPost(ModifyNoticeRequest modifyNoticeRequest) {
+    public void modifyNotice(ModifyNoticeRequest modifyNoticeRequest) {
         this.title = modifyNoticeRequest.getTitle();
         this.content = modifyNoticeRequest.getContent();
     }
