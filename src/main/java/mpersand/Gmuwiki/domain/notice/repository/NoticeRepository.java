@@ -1,4 +1,4 @@
 package mpersand.Gmuwiki.domain.notice.repository;
 
-public interface NoticeRepository {
+public interface NoticeRepository <Notice, Long>{
 }
