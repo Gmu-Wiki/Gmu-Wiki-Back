@@ -28,6 +28,9 @@ public class Notice {
     @Column(nullable = false)
     private String content;
 
+    @Column(nullable = false)
+    private String name;
+
     @ManyToOne
     @JoinColumn(name = "email")
     private User user;
