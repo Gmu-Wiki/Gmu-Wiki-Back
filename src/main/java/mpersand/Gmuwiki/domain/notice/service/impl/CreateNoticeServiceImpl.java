@@ -27,5 +27,6 @@ public class CreateNoticeServiceImpl implements CreateNoticeService {
                 .name(createNoticeRequest.getName())
                 .user(user)
                 .build();
+        noticeRepository.save(notice);
     }
 }

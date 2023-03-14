@@ -35,7 +35,7 @@ public class AdminNoticeController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        removeNoticeService.delete(id);
+        removeNoticeService.remove(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

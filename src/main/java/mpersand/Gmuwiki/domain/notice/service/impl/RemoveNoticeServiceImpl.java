@@ -16,7 +16,7 @@ public class RemoveNoticeServiceImpl implements RemoveNoticeService {
     private final UserUtil userUtil;
 
     @Override
-    public void delete(Long id){
+    public void remove(Long id){
         Notice notice = noticeRepository.findById(id)
                 .orElseThrow(()->new NoticeNotFoundException("게시물을 찾을 수 없습니다"));
         if((notice.getUser().getEmail().equals(userUtil.currentUser().getEmail()))){
