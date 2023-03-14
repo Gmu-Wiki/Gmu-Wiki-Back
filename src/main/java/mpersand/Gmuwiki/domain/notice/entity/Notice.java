@@ -32,7 +32,7 @@ public class Notice {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "email")
+    @JoinColumn(name = "id")
     private User user;
 
     public void modifyNotice(ModifyNoticeRequest modifyNoticeRequest) {
