@@ -1,4 +1,4 @@
-package mpersand.Gmuwiki.domain.notice;
+package mpersand.Gmuwiki.domain.notice.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

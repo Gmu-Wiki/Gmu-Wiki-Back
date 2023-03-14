@@ -1,7 +1,7 @@
 package mpersand.Gmuwiki.domain.notice.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import mpersand.Gmuwiki.domain.notice.Notice;
+import mpersand.Gmuwiki.domain.notice.entity.Notice;
 import mpersand.Gmuwiki.domain.notice.exception.NoticeNotFoundException;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.reqeust.ModifyNoticeRequest;
 import mpersand.Gmuwiki.domain.notice.repository.NoticeRepository;
