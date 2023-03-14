@@ -18,8 +18,8 @@ public class ModifyNoticeServiceImpl implements ModifyNoticeService {
     @Override
     public void modify(Long id, ModifyNoticeRequest modifyNoticeRequest){
         Notice notice = noticeRepository.findById(id)
-                .orElseThrow(()->new NoticeNotFoundException("게시글을 찾을 수 없습니다"));
-       notice.modifyNotice(modifyNoticeRequest);
+                .orElseThrow(()-> new NoticeNotFoundException("게시글을 찾을 수 없습니다"));
+        notice.update(modifyNoticeRequest);
     }
 }
 
