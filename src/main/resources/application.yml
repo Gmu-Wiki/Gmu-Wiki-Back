@@ -11,10 +11,14 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
 
   main:
     allow-bean-definition-overriding: 'true'
+
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
 
 jwt:
   accessSecret: ${ACCESS_SECRET}
