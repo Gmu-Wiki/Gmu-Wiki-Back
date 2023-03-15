@@ -16,7 +16,7 @@ public class ModifyNoticeServiceImpl implements ModifyNoticeService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void modify(Long id, ModifyNoticeRequest modifyNoticeRequest){
+    public void excute(Long id, ModifyNoticeRequest modifyNoticeRequest){
         Notice notice = noticeRepository.findById(id)
                 .orElseThrow(()-> new NoticeNotFoundException("게시글을 찾을 수 없습니다"));
         notice.update(modifyNoticeRequest);

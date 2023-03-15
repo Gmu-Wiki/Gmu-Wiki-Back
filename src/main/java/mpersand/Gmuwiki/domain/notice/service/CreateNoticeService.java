@@ -3,5 +3,5 @@ package mpersand.Gmuwiki.domain.notice.service;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.reqeust.CreateNoticeRequest;
 
 public interface CreateNoticeService {
-    void create(CreateNoticeRequest createNoticeRequest);
+    void excute(CreateNoticeRequest createNoticeRequest);
 }

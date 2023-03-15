@@ -18,7 +18,7 @@ public class CreateNoticeServiceImpl implements CreateNoticeService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void create(CreateNoticeRequest createNoticeRequest){
+    public void excute(CreateNoticeRequest createNoticeRequest){
         User user = userUtil.currentUser();
 
         Notice notice = Notice.builder()
