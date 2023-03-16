@@ -17,12 +17,12 @@ public class RemoveNoticeServiceImpl implements RemoveNoticeService {
     private final UserUtil userUtil;
 
     @Override
-    public void excute(Long id){
+    public void execute(Long id){
         Notice notice = noticeRepository.findById(id)
                 .orElseThrow(()->new NoticeNotFoundException("게시물을 찾을 수 없습니다"));
         User user = userUtil.currentUser();
-        if(notice.getUser().getEmail().equals(user.getEmail())){
-            noticeRepository.deleteById(id);
+        if(notice.getUser().equals(user)){
+            noticeRepository.delete(notice);
         }
         else{
             throw new EmailMIsmathchException("이메일이 일치하지 않습니다");
