@@ -3,6 +3,7 @@ package mpersand.Gmuwiki.global.error.handler;
 import lombok.extern.slf4j.Slf4j;
 import mpersand.Gmuwiki.domain.auth.exception.ExistEmailException;
 import mpersand.Gmuwiki.domain.auth.exception.MisMatchPasswordException;
+import mpersand.Gmuwiki.domain.auth.exception.RefreshTokenNotFoundException;
 import mpersand.Gmuwiki.domain.auth.exception.UserNotFoundException;
 import mpersand.Gmuwiki.domain.email.exception.EmailSendFailedException;
 import mpersand.Gmuwiki.domain.email.exception.ManyRequestEmailAuthException;
@@ -80,6 +81,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MisMatchAuthCodeException.class)
     public ResponseEntity<ErrorMessage> handleMisMatchAuthCodeException(HttpServletRequest request, MisMatchAuthCodeException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(RefreshTokenNotFoundException.class)
+    public ResponseEntity<ErrorMessage> handleRefreshTokenNotFoundException(HttpServletRequest request, RefreshTokenNotFoundException e) {
         printError(request, e, e.getErrorCode().getMessage());
         ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
         return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
