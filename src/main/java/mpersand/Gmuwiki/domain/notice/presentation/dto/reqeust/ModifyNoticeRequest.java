@@ -14,6 +14,5 @@ public class ModifyNoticeRequest {
     @NotBlank(message = "내용은 필수 입력값입니다")
     private String content;
 
-    @NotBlank(message = "이름은 필수입력값입니다")
-    private String name;
+
 }
