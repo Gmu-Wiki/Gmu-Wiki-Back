@@ -4,11 +4,9 @@ import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.notice.entity.Notice;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.reqeust.CreateNoticeRequest;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.reqeust.ModifyNoticeRequest;
+import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeIdResponse;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeResponse;
-import mpersand.Gmuwiki.domain.notice.service.CreateNoticeService;
-import mpersand.Gmuwiki.domain.notice.service.ListNoticeService;
-import mpersand.Gmuwiki.domain.notice.service.ModifyNoticeService;
-import mpersand.Gmuwiki.domain.notice.service.RemoveNoticeService;
+import mpersand.Gmuwiki.domain.notice.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +23,7 @@ public class AdminNoticeController {
     private final ModifyNoticeService modifyNoticeService;
     private final RemoveNoticeService removeNoticeService;
     private final ListNoticeService listNoticeService;
+    private final OneNoticeService oneNoticeService;
 
 
     @PostMapping
@@ -49,6 +48,12 @@ public class AdminNoticeController {
     public ResponseEntity<List<NoticeResponse>> findALl(){
         List<NoticeResponse> list = listNoticeService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<NoticeIdResponse> findOne(@PathVariable("id") Long id){
+        NoticeIdResponse oneFindById = oneNoticeService.execute(id);
+        return new ResponseEntity<>(oneFindById,HttpStatus.OK);
     }
 
 
