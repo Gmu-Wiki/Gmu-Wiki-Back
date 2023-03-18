@@ -55,7 +55,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NoticeNotFoundException.class)
-    public ResponseEntity<ErrorMessage> handleNoticeNotFoundException(HttpServletRequest request, MisMatchPasswordException e){
+    public ResponseEntity<ErrorMessage> handleNoticeNotFoundException(HttpServletRequest request, NoticeNotFoundException e){
         printError(request,e,e.getErrorCode().getMessage());
         ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
         return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
