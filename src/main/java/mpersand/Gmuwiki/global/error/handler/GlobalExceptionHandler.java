@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import mpersand.Gmuwiki.domain.auth.exception.ExistEmailException;
 import mpersand.Gmuwiki.domain.auth.exception.MisMatchPasswordException;
 import mpersand.Gmuwiki.domain.auth.exception.UserNotFoundException;
+import mpersand.Gmuwiki.domain.notice.exception.NoticeNotFoundException;
 import mpersand.Gmuwiki.global.error.ErrorMessage;
 import mpersand.Gmuwiki.global.security.exception.TokenExpirationException;
 import mpersand.Gmuwiki.global.security.exception.TokenNotValidException;
@@ -53,7 +54,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
 
-    @ExceptionHandler(MisMatchPasswordException.class)
+    @ExceptionHandler(NoticeNotFoundException.class)
     public ResponseEntity<ErrorMessage> handleNoticeNotFoundException(HttpServletRequest request, MisMatchPasswordException e){
         printError(request,e,e.getErrorCode().getMessage());
         ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
