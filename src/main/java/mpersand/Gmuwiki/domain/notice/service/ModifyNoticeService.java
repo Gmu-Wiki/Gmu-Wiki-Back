@@ -18,6 +18,8 @@ public class ModifyNoticeService {
         Notice notice = noticeRepository.findById(id)
                 .orElseThrow(()-> new NoticeNotFoundException("게시글을 찾을 수 없습니다"));
         notice.update(modifyNoticeRequest);
+
+        noticeRepository.save(notice);
     }
 }
 
