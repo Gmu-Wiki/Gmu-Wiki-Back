@@ -21,11 +21,10 @@ public class RemoveNoticeService {
         Notice notice = noticeRepository.findById(id)
                 .orElseThrow(()->new NoticeNotFoundException("게시물을 찾을 수 없습니다"));
         User user = userUtil.currentUser();
-        if(notice.getUser().equals(user)){
-            noticeRepository.delete(notice);
-        }
-        else{
+
+        if(!notice.getUser().getEmail().equals(userUtil.currentUser().getEmail())){
             throw new EmailMIsmathchException("이메일이 일치하지 않습니다");
         }
+        noticeRepository.delete(notice);
     }
 }
