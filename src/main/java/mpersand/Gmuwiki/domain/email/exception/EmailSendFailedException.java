@@ -2,14 +2,13 @@ package mpersand.Gmuwiki.domain.email.exception;
 
 import lombok.Getter;
 import mpersand.Gmuwiki.global.error.ErrorCode;
+import mpersand.Gmuwiki.global.error.GimuwikiException;
 
 @Getter
-public class EmailSendFailedException extends RuntimeException {
+public class EmailSendFailedException extends GimuwikiException {
 
-    private final ErrorCode errorCode;
-    public EmailSendFailedException(String message) {
-        super(message);
-        this.errorCode = ErrorCode.EMAIL_SEND_FAIL;
+    public EmailSendFailedException() {
+        super(ErrorCode.EMAIL_SEND_FAIL);
     }
 }
 

@@ -2,13 +2,12 @@ package mpersand.Gmuwiki.domain.email.exception;
 
 import lombok.Getter;
 import mpersand.Gmuwiki.global.error.ErrorCode;
+import mpersand.Gmuwiki.global.error.GimuwikiException;
 
 @Getter
-public class MisMatchAuthCodeException extends RuntimeException {
+public class MisMatchAuthCodeException extends GimuwikiException {
 
-    private final ErrorCode errorCode;
-    public MisMatchAuthCodeException(String message) {
-        super(message);
-        this.errorCode = ErrorCode.MISMATCH_AUTH_CODE;
+    public MisMatchAuthCodeException() {
+        super(ErrorCode.MISMATCH_AUTH_CODE);
     }
 }

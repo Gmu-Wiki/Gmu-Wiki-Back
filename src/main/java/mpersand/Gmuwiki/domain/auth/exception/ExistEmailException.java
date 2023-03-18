@@ -2,13 +2,12 @@ package mpersand.Gmuwiki.domain.auth.exception;
 
 import lombok.Getter;
 import mpersand.Gmuwiki.global.error.ErrorCode;
+import mpersand.Gmuwiki.global.error.GimuwikiException;
 
 @Getter
-public class ExistEmailException extends RuntimeException {
+public class ExistEmailException extends GimuwikiException {
 
-    private final ErrorCode errorCode;
-    public ExistEmailException(String message) {
-        super(message);
-        this.errorCode = ErrorCode.ALREADY_EXIST_EMAIL;
+    public ExistEmailException() {
+        super(ErrorCode.ALREADY_EXIST_EMAIL);
     }
 }

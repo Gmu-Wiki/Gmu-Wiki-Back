@@ -2,13 +2,12 @@ package mpersand.Gmuwiki.domain.email.exception;
 
 import lombok.Getter;
 import mpersand.Gmuwiki.global.error.ErrorCode;
+import mpersand.Gmuwiki.global.error.GimuwikiException;
 
 @Getter
-public class ManyRequestEmailAuthException extends RuntimeException {
+public class ManyRequestEmailAuthException extends GimuwikiException {
 
-    private final ErrorCode errorCode;
-    public ManyRequestEmailAuthException(String message) {
-        super(message);
-        this.errorCode = ErrorCode.MANY_REQUEST_EMAIL_AUTH;
+    public ManyRequestEmailAuthException() {
+        super(ErrorCode.MANY_REQUEST_EMAIL_AUTH);
     }
 }

@@ -24,10 +24,10 @@ public class TokenReissueService {
     public NewTokenResponse execute(String requestToken) {
         String email = tokenProvider.getUserEmail(requestToken, jwtProperties.getRefreshSecret());
         RefreshToken token = refreshTokenRepository.findById(email)
-                .orElseThrow(() -> new RefreshTokenNotFoundException("리프레시 토큰이 존재하지 없습니다."));
+                .orElseThrow(() -> new RefreshTokenNotFoundException());
 
         if(!token.getRefreshToken().equals(requestToken)) {
-            throw new TokenNotValidException("검증되지 않은 토큰입니다.");
+            throw new TokenNotValidException();
         }
 
         String accessToken = tokenProvider.generatedAccessToken(email);

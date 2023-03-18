@@ -2,14 +2,13 @@ package mpersand.Gmuwiki.domain.auth.exception;
 
 import lombok.Getter;
 import mpersand.Gmuwiki.global.error.ErrorCode;
+import mpersand.Gmuwiki.global.error.GimuwikiException;
 
 @Getter
-public class RefreshTokenNotFoundException extends RuntimeException {
-    private final ErrorCode errorCode;
+public class RefreshTokenNotFoundException extends GimuwikiException {
 
-    public RefreshTokenNotFoundException(String message) {
-        super(message);
-        this.errorCode = ErrorCode.REFRESH_TOKEN_NOT_FOUND;
+    public RefreshTokenNotFoundException() {
+        super(ErrorCode.REFRESH_TOKEN_NOT_FOUND);
     }
 
 }

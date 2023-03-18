@@ -14,12 +14,12 @@ public class EmailUtil {
 
     public EmailAuth getEmailEntityById(String email) {
         return emailAuthRepository.findById(email)
-                .orElseThrow(() -> new NotVerifyEmailException("검증되지 않은 이메일입니다."));
+                .orElseThrow(() -> new NotVerifyEmailException());
     }
 
     public void checkEmailAuthentication(EmailAuth emailAuth) {
         if(!emailAuth.isAuthentication()) {
-            throw new NotVerifyEmailException("검증되지 않은 이메일입니다.");
+            throw new NotVerifyEmailException();
         }
     }
 }
