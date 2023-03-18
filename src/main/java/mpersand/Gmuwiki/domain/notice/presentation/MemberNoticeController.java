@@ -23,7 +23,7 @@ public class MemberNoticeController {
     private final OneNoticeService oneNoticeService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<NoticeResponse>> findALl(){
+    public ResponseEntity<List<NoticeResponse>> findAll(){
         List<NoticeResponse> list = listNoticeService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
