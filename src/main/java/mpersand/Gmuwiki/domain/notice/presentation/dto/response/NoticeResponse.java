@@ -11,5 +11,5 @@ public class NoticeResponse {
 
     private Long id;
     private String title;
-    private String name;
+    private String content;
 }
