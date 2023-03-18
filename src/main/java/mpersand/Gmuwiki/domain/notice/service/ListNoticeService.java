@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class ListNoticeService {
     private final NoticeRepository noticeRepository;
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(readOnly = true)
     public List<NoticeResponse> execute() {
         List<Notice> notices = noticeRepository.findAll();
         return notices.stream()
