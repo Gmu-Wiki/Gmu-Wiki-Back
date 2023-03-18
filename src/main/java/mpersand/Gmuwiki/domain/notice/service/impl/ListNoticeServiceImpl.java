@@ -25,7 +25,6 @@ public class ListNoticeServiceImpl implements ListNoticeService {
         return notices.stream()
                 .map(notice -> new NoticeResponse(notice.getId(), notice.getTitle(), notice.getName()))
                 .collect(Collectors.toList());
-
     }
 
 }
