@@ -19,7 +19,7 @@ public enum ErrorCode {
     REFRESH_TOKEN_NOT_FOUND("존재하지 않는 리프레시 토큰입니다.", 404),
     BLACKLIST_ALREADY_EXIST("블랙리스트에 이미 등록되었습니다.",400),
     EMAIL_MISMATCH("이메일이 일치하지 않습니다", 400),
-    POST_NOT_FOUND("게시물을 찾을수 없습니다", 404);
+    NOTICE_NOT_FOUND("게시물을 찾을수 없습니다", 404);
 
     private final String message;
     private final int status;
