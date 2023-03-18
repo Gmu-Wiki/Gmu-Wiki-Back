@@ -56,8 +56,4 @@ public class AdminNoticeController {
         return new ResponseEntity<>(oneFindById,HttpStatus.OK);
     }
 
-
-
-
-
 }
