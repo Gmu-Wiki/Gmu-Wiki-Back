@@ -19,17 +19,17 @@ public class UserUtil {
     public User currentUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("존재하지 않는 사용자입니다"));
+                .orElseThrow(() -> new UserNotFoundException());
     }
 
     public void checkPassword(User user, String password) {
         if(!passwordEncoder.matches(password, user.getPassword())) {
-            throw new MisMatchPasswordException("비밀번호가 일치하지 않습니다.");
+            throw new MisMatchPasswordException();
         }
     }
 
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new UserNotFoundException());
     }
 }

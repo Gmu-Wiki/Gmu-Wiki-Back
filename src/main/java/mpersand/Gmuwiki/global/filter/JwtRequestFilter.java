@@ -36,7 +36,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             tokenProvider.extractAllClaims(accessToken, jwtProperties.getAccessSecret());
 
             if (!tokenProvider.getTokenType(accessToken, jwtProperties.getAccessSecret()).equals("ACCESS_TOKEN")) {
-                throw new TokenNotValidException("토큰이 유효하지 않습니다.");
+                throw new TokenNotValidException();
             }
 
             String email = tokenProvider.getUserEmail(accessToken, jwtProperties.getAccessSecret());

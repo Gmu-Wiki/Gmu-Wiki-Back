@@ -2,13 +2,12 @@ package mpersand.Gmuwiki.domain.email.exception;
 
 import lombok.Getter;
 import mpersand.Gmuwiki.global.error.ErrorCode;
+import mpersand.Gmuwiki.global.error.GimuwikiException;
 
 @Getter
-public class NotVerifyEmailException extends RuntimeException {
+public class NotVerifyEmailException extends GimuwikiException {
 
-    private final ErrorCode errorCode;
-    public NotVerifyEmailException(String message) {
-        super(message);
-        this.errorCode = ErrorCode.NOT_VERIFY_EMAIL;
+    public NotVerifyEmailException() {
+        super(ErrorCode.NOT_VERIFY_EMAIL);
     }
 }

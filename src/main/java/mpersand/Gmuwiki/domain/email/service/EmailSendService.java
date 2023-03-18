@@ -60,7 +60,7 @@ public class EmailSendService {
                 .build();
 
         if(emailAuth.getAttemptCount() >= 3) {
-            throw new ManyRequestEmailAuthException("이메일은 15분에 최대 3회까지 요청 가능합니다");
+            throw new ManyRequestEmailAuthException();
         }
 
         emailAuth.updateRandomValue(authCode);
@@ -76,7 +76,7 @@ public class EmailSendService {
             helper.setText(content,true);
             javaMailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            throw new EmailSendFailedException("이메일 발송에 실패하였습니다");
+            throw new EmailSendFailedException();
         }
 
         return message;

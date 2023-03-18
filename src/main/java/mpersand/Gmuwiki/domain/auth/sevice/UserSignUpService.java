@@ -24,7 +24,7 @@ public class UserSignUpService {
     public void execute(SignUpRequest signUpRequest) {
 
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
-            throw new ExistEmailException("이미 사용중인 이메일 입니다.");
+            throw new ExistEmailException();
         }
 
         EmailAuth emailAuth = emailUtil.getEmailEntityById(signUpRequest.getEmail());
