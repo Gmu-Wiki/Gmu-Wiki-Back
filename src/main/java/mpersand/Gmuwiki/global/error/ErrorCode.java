@@ -13,11 +13,13 @@ public enum ErrorCode {
     NOT_VERIFY_EMAIL("검증되지 않은 이메일입니다." , 401),
     MANY_REQUEST_EMAIL_AUTH("15분에 최대 3번의 이메일 요청만 가능합니다." , 429),
     EXPIRE_EMAIL_CODE("이메일 인증번호 시간이 만료되었습니다.", 401),
+    MISMATCH_AUTH_CODE("인증번호가 일치하지 않습니다." , 400),
     USER_NOT_FOUND("사용자를 찾을 수 없습니다", 404),
     TOKEN_IS_EXPIRED("토큰이 만료 되었습니다.", 401),
     TOKEN_NOT_VALID("토큰이 유효 하지 않습니다.", 401),
     REFRESH_TOKEN_NOT_FOUND("존재하지 않는 리프레시 토큰입니다.", 404),
-    BLACKLIST_ALREADY_EXIST("블랙리스트에 이미 등록되었습니다.",400);
+    BLACKLIST_ALREADY_EXIST("블랙리스트에 이미 등록되었습니다.",400),
+    EMAIL_SEND_FAIL("메일 발송에 실패했습니다", 500);
 
     private final String message;
     private final int status;

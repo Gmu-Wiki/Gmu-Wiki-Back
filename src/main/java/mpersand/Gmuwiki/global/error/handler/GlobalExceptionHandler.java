@@ -4,6 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import mpersand.Gmuwiki.domain.auth.exception.ExistEmailException;
 import mpersand.Gmuwiki.domain.auth.exception.MisMatchPasswordException;
 import mpersand.Gmuwiki.domain.auth.exception.UserNotFoundException;
+import mpersand.Gmuwiki.domain.email.exception.EmailSendFailedException;
+import mpersand.Gmuwiki.domain.email.exception.ManyRequestEmailAuthException;
+import mpersand.Gmuwiki.domain.email.exception.MisMatchAuthCodeException;
+import mpersand.Gmuwiki.domain.email.exception.NotVerifyEmailException;
 import mpersand.Gmuwiki.global.error.ErrorMessage;
 import mpersand.Gmuwiki.global.security.exception.TokenExpirationException;
 import mpersand.Gmuwiki.global.security.exception.TokenNotValidException;
@@ -48,6 +52,34 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MisMatchPasswordException.class)
     public ResponseEntity<ErrorMessage> handleMisMatchPasswordException(HttpServletRequest request, MisMatchPasswordException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(NotVerifyEmailException.class)
+    public ResponseEntity<ErrorMessage> handleNotVerifyEmailException(HttpServletRequest request, NotVerifyEmailException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(ManyRequestEmailAuthException.class)
+    public ResponseEntity<ErrorMessage> handleManyRequestEmailException(HttpServletRequest request, ManyRequestEmailAuthException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(EmailSendFailedException.class)
+    public ResponseEntity<ErrorMessage> handleEmailSendFailedException(HttpServletRequest request, EmailSendFailedException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(MisMatchAuthCodeException.class)
+    public ResponseEntity<ErrorMessage> handleMisMatchAuthCodeException(HttpServletRequest request, MisMatchAuthCodeException e) {
         printError(request, e, e.getErrorCode().getMessage());
         ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
         return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));

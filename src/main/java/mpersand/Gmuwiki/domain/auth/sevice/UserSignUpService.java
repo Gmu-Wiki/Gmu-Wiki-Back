@@ -3,9 +3,11 @@ package mpersand.Gmuwiki.domain.auth.sevice;
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.auth.exception.ExistEmailException;
 import mpersand.Gmuwiki.domain.auth.presentation.dto.request.SignUpRequest;
+import mpersand.Gmuwiki.domain.email.entity.EmailAuth;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import mpersand.Gmuwiki.domain.user.enums.Role;
 import mpersand.Gmuwiki.domain.user.repository.UserRepository;
+import mpersand.Gmuwiki.global.util.EmailUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,7 @@ public class UserSignUpService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final EmailUtil emailUtil;
 
     @Transactional(rollbackFor = Exception.class)
     public void execute(SignUpRequest signUpRequest) {
@@ -23,6 +26,10 @@ public class UserSignUpService {
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new ExistEmailException("이미 사용중인 이메일 입니다.");
         }
+
+        EmailAuth emailAuth = emailUtil.getEmailEntityById(signUpRequest.getEmail());
+
+        emailUtil.checkEmailAuthentication(emailAuth);
 
         User user = User.builder()
                 .email(signUpRequest.getEmail())
