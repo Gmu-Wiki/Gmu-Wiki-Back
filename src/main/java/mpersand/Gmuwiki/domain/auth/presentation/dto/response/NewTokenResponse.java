@@ -1,5 +1,6 @@
 package mpersand.Gmuwiki.domain.auth.presentation.dto.response;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +10,10 @@ import lombok.NoArgsConstructor;
 import java.time.ZonedDateTime;
 
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class LoginResponse {
+public class NewTokenResponse {
     private String accessToken;
     private String refreshToken;
 
