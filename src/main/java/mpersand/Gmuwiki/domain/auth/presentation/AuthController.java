@@ -7,6 +7,7 @@ import mpersand.Gmuwiki.domain.auth.presentation.dto.response.LoginResponse;
 import mpersand.Gmuwiki.domain.auth.presentation.dto.response.NewTokenResponse;
 import mpersand.Gmuwiki.domain.auth.sevice.TokenReissueService;
 import mpersand.Gmuwiki.domain.auth.sevice.UserLoginService;
+import mpersand.Gmuwiki.domain.auth.sevice.UserLogoutService;
 import mpersand.Gmuwiki.domain.auth.sevice.UserSignUpService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ public class AuthController {
 
     private final UserSignUpService userSignUpService;
     private final UserLoginService userLoginService;
+
+    private final UserLogoutService userLogoutService;
     private final TokenReissueService tokenReissueService;
 
     @PostMapping("/signup")
@@ -35,9 +38,17 @@ public class AuthController {
         return new ResponseEntity<>(loginResponse, HttpStatus.OK);
     }
 
+    @DeleteMapping
+    public ResponseEntity<Void> logout(@RequestHeader("Authorization")String accessToken){
+        userLogoutService.execute(accessToken);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
+    }
+
     @PatchMapping
     public ResponseEntity<NewTokenResponse> reIssueToken(@RequestHeader("RefreshToken") String token) {
         NewTokenResponse reIssueToken = tokenReissueService.execute(token);
         return ResponseEntity.ok(reIssueToken);
     }
+
 }
