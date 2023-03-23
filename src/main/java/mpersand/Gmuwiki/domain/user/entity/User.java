@@ -36,4 +36,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public User updatePassword(String password) {
+        return new User(
+                this.userId,
+                this.email,
+                password,
+                this.name,
+                this.number,
+                this.role
+        );
+    }
 }
