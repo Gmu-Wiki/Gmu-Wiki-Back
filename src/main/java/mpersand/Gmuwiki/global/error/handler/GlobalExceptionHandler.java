@@ -1,18 +1,8 @@
 package mpersand.Gmuwiki.global.error.handler;
 
 import lombok.extern.slf4j.Slf4j;
-import mpersand.Gmuwiki.domain.auth.exception.ExistEmailException;
-import mpersand.Gmuwiki.domain.auth.exception.MisMatchPasswordException;
-import mpersand.Gmuwiki.domain.auth.exception.RefreshTokenNotFoundException;
-import mpersand.Gmuwiki.domain.auth.exception.UserNotFoundException;
-import mpersand.Gmuwiki.domain.email.exception.EmailSendFailedException;
-import mpersand.Gmuwiki.domain.email.exception.ManyRequestEmailAuthException;
-import mpersand.Gmuwiki.domain.email.exception.MisMatchAuthCodeException;
-import mpersand.Gmuwiki.domain.email.exception.NotVerifyEmailException;
 import mpersand.Gmuwiki.global.error.ErrorMessage;
 import mpersand.Gmuwiki.global.error.GimuwikiException;
-import mpersand.Gmuwiki.global.security.exception.TokenExpirationException;
-import mpersand.Gmuwiki.global.security.exception.TokenNotValidException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
