@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/email/**").permitAll()
-                .antMatchers("/user/**").permitAll()
+                .antMatchers("/user/**").authenticated()
                 .anyRequest().authenticated();
 
         //완성 전 config 싹 한번 바꾸기
