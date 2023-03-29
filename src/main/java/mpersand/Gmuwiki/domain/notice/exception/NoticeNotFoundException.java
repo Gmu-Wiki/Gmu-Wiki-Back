@@ -9,6 +9,6 @@ public class NoticeNotFoundException extends RuntimeException{
 
     public NoticeNotFoundException(String message){
         super(message);
-        this.errorCode = ErrorCode.POST_NOT_FOUND;
+        this.errorCode = ErrorCode.NOTICE_NOT_FOUND;
     }
 }
