@@ -7,18 +7,18 @@ import mpersand.Gmuwiki.domain.notice.repository.NoticeRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import mpersand.Gmuwiki.global.util.UserUtil;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class CreateNoticeService{
+public class CreateNoticeService {
     private final UserUtil userUtil;
     private final NoticeRepository noticeRepository;
 
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public void execute(CreateNoticeRequest createNoticeRequest){
         User user = userUtil.currentUser();
+
         Notice notice = Notice.builder()
                 .title(createNoticeRequest.getTitle())
                 .content(createNoticeRequest.getContent())
