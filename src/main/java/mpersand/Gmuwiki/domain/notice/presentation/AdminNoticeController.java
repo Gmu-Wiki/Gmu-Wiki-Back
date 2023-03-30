@@ -2,26 +2,25 @@ package mpersand.Gmuwiki.domain.notice.presentation;
 
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.request.CreateNoticeRequest;
-import mpersand.Gmuwiki.domain.notice.service.CreateNoticeService;
+import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeResponse;
+import mpersand.Gmuwiki.domain.notice.service.ListNoticeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/notice")
 @RequiredArgsConstructor
 public class AdminNoticeController {
 
-    private final CreateNoticeService createNoticeService;
+    private final ListNoticeService listNoticeService;
 
-    @PostMapping
-    public ResponseEntity<Void> create(@RequestBody @Valid CreateNoticeRequest createNoticeRequest){
-        createNoticeService.execute(createNoticeRequest);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @GetMapping("/list")
+    public ResponseEntity<List<NoticeResponse>> findAll(){
+        List<NoticeResponse> list = listNoticeService.execute();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
