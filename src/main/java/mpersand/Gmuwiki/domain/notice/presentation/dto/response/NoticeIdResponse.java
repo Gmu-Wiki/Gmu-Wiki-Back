@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class NoticeIdResponse {
+
     private Long id;
     private String title;
     private String name;
     private String content;
+
 }
