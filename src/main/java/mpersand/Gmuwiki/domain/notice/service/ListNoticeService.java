@@ -3,28 +3,26 @@ package mpersand.Gmuwiki.domain.notice.service;
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.notice.entity.Notice;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.request.CreateNoticeRequest;
+import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeResponse;
 import mpersand.Gmuwiki.domain.notice.repository.NoticeRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import mpersand.Gmuwiki.global.util.UserUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
-public class CreateNoticeService {
-    private final UserUtil userUtil;
+public class ListNoticeService {
     private final NoticeRepository noticeRepository;
 
-    @Transactional(rollbackFor = Exception.class)
-    public void execute(CreateNoticeRequest createNoticeRequest){
-        User user = userUtil.currentUser();
-
-        Notice notice = Notice.builder()
-                .title(createNoticeRequest.getTitle())
-                .content(createNoticeRequest.getContent())
-                .name(createNoticeRequest.getName())
-                .user(user)
-                .build();
-        noticeRepository.save(notice);
+    @Transactional(readOnly = true)
+    public List<NoticeResponse> execute() {
+        List<Notice> notices = noticeRepository.findAll();
+        return notices.stream()
+                .map(notice -> new NoticeResponse(notice.getId(), notice.getTitle(), notice.getName()))
+                .collect(Collectors.toList());
     }
 }
