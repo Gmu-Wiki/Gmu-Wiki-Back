@@ -36,6 +36,8 @@ public class SecurityConfig {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/email/**").permitAll()
+                .antMatchers("/admin/notice/**").hasRole("ADMIN")
+                .antMatchers("/user/notice/**").hasRole("USER")
                 .anyRequest().authenticated();
 
         http
