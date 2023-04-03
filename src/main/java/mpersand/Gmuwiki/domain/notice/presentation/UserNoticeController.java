@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/member/notice")
+@RequestMapping("/user/notice")
 @RequiredArgsConstructor
-public class MemberNoticeController {
+public class UserNoticeController {
 
     private final ListNoticeService listNoticeService;
     private final OneNoticeService oneNoticeService;
