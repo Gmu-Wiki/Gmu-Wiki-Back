@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+
 @RequiredArgsConstructor
 public class MemberDetails implements UserDetails {
 
