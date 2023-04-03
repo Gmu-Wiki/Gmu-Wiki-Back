@@ -1,6 +1,7 @@
 package mpersand.Gmuwiki.global.config.security;
 
 import lombok.RequiredArgsConstructor;
+import mpersand.Gmuwiki.domain.user.enums.Role;
 import mpersand.Gmuwiki.global.filter.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,8 +37,8 @@ public class SecurityConfig {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/email/**").permitAll()
-                .antMatchers("/admin/notice/**").hasRole("ADMIN")
-                .antMatchers("/user/notice/**").hasRole("USER")
+                .antMatchers("/admin/notice/**").hasAuthority("ADMIN")
+                .antMatchers("/user/notice/**").hasAuthority("USER")
                 .anyRequest().authenticated();
 
         http
