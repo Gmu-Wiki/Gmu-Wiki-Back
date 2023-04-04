@@ -6,6 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
+
 
 @RequiredArgsConstructor
 public class MemberDetails implements UserDetails {
@@ -13,9 +15,8 @@ public class MemberDetails implements UserDetails {
     private final User user;
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+    public Collection<? extends GrantedAuthority> getAuthorities() {return Collections.singleton(user.getRole()); }
+
     @Override
     public String getPassword() {
         return user.getPassword();
