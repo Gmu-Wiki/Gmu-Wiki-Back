@@ -4,7 +4,6 @@ import lombok.*;
 
 import java.util.List;
 @Getter
-@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
 public class NoticeListResponse {
