@@ -3,6 +3,7 @@ package mpersand.Gmuwiki.domain.notice.presentation;
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.request.CreateNoticeRequest;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeDetailResponse;
+import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeListResponse;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeResponse;
 import mpersand.Gmuwiki.domain.notice.service.CreateNoticeService;
 import mpersand.Gmuwiki.domain.notice.service.ListNoticeService;
@@ -24,8 +25,8 @@ public class AdminNoticeController {
     private final CreateNoticeService createNoticeService;
 
     @GetMapping
-    public ResponseEntity<List<NoticeResponse>> findAll(){
-        List<NoticeResponse> list = (List<NoticeResponse>) listNoticeService.execute();
+    public ResponseEntity<NoticeListResponse> findAll(){
+        var list = listNoticeService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -35,7 +36,7 @@ public class AdminNoticeController {
         return new ResponseEntity<>(oneFindById,HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Void> create(@RequestBody @Valid CreateNoticeRequest createNoticeRequest){
         createNoticeService.execute(createNoticeRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
