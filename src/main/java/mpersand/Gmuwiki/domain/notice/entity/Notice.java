@@ -1,9 +1,6 @@
 package mpersand.Gmuwiki.domain.notice.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import mpersand.Gmuwiki.domain.user.entity.User;
 
 import javax.persistence.*;
@@ -12,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Notice {
 
     @Id
