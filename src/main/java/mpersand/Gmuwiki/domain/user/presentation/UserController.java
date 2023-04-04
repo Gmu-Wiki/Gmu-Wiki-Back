@@ -18,7 +18,7 @@ public class UserController {
 
     private final ChangePasswordService changePasswordService;
 
-    @PatchMapping("/change-pw")
+    @PatchMapping("/password")
     public ResponseEntity<Void> ChangePassword(@RequestBody @Valid ChangePasswordRequest changePasswordRequest) {
         changePasswordService.execute(changePasswordRequest);
         return ResponseEntity.noContent().build();
