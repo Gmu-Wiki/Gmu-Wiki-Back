@@ -1,13 +1,17 @@
 package mpersand.Gmuwiki.domain.notice.presentation;
 
 import lombok.RequiredArgsConstructor;
+import mpersand.Gmuwiki.domain.notice.presentation.dto.request.CreateNoticeRequest;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeDetailResponse;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeListResponse;
+import mpersand.Gmuwiki.domain.notice.service.CreateNoticeService;
 import mpersand.Gmuwiki.domain.notice.service.ListNoticeService;
 import mpersand.Gmuwiki.domain.notice.service.OneNoticeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/user/notice")
@@ -16,6 +20,7 @@ public class UserNoticeController {
 
     private final ListNoticeService listNoticeService;
     private final OneNoticeService oneNoticeService;
+    private final CreateNoticeService createNoticeService;
 
     @GetMapping
     public ResponseEntity<NoticeListResponse> findAll(){
@@ -28,4 +33,5 @@ public class UserNoticeController {
         NoticeDetailResponse oneFindById = oneNoticeService.execute(id);
         return new ResponseEntity<>(oneFindById,HttpStatus.OK);
     }
+
 }
