@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .antMatchers("/email/**").permitAll()
                 .antMatchers("/admin/notice/**").hasAuthority("ADMIN")
                 .antMatchers("/user/notice/**").hasAuthority("USER")
-                .anyRequest().authenticated();
+                .anyRequest().denyAll();
 
         http
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
