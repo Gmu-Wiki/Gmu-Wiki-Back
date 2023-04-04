@@ -14,10 +14,16 @@ import java.util.Optional;
 public class OneNoticeService {
     private final NoticeRepository noticeRepository;
 
-    @Transactional(rollbackFor = Exception.class)
-    public NoticeIdResponse execute(Long id){
-        Optional<Notice> notice = noticeRepository.findById(id);
-        return new NoticeIdResponse
-                (notice.get().getId(), notice.get().getName(),notice.get().getTitle(),notice.get().getContent());
+    @Transactional(readOnly = true)
+    public NoticeIdResponse execute(Long id) {
+        Notice notice = noticeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException());
+        NoticeIdResponse noticeIdResponse = NoticeIdResponse.builder()
+                .id(notice.getId())
+                .content(notice.getContent())
+                .title(notice.getTitle())
+                .build();
+
+        return noticeIdResponse;
     }
 }
