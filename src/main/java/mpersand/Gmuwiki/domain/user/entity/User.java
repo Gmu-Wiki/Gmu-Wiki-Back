@@ -1,9 +1,6 @@
 package mpersand.Gmuwiki.domain.user.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import mpersand.Gmuwiki.domain.user.enums.Role;
 
 import javax.persistence.*;
@@ -12,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
     @Id
@@ -36,14 +33,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User updatePassword(String password) {
-        return new User(
-                this.userId,
-                this.email,
-                password,
-                this.name,
-                this.number,
-                this.role
-        );
+    public void updatePassword(String password) {
+        this.password = password;
     }
 }
