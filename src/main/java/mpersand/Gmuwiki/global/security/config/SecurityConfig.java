@@ -1,6 +1,7 @@
-package mpersand.Gmuwiki.global.config.security;
+package mpersand.Gmuwiki.global.security.config;
 
 import lombok.RequiredArgsConstructor;
+import mpersand.Gmuwiki.global.filter.ExceptionFilter;
 import mpersand.Gmuwiki.global.filter.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +9,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +22,7 @@ import org.springframework.web.cors.CorsUtils;
 public class SecurityConfig {
 
     private final JwtRequestFilter jwtRequestFilter;
+    private final ExceptionFilter exceptionFilter;
 
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -36,13 +37,12 @@ public class SecurityConfig {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/email/**").permitAll()
-                .antMatchers("/user/**").authenticated()
-                .anyRequest().authenticated();
-
-        //완성 전 config 싹 한번 바꾸기
+                .antMatchers("/user/**").hasAuthority("USER")
+                .anyRequest().denyAll();
 
         http
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(exceptionFilter, JwtRequestFilter.class);
 
         return http.build();
     }
