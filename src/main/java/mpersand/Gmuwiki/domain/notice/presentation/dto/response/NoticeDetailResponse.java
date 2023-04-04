@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class NoticeIdResponse {
+public class NoticeDetailResponse {
 
     private Long id;
     private String title;
