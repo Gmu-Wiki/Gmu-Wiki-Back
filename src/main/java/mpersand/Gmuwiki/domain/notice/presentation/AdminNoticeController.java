@@ -21,7 +21,7 @@ public class AdminNoticeController {
 
     @GetMapping("/list")
     public ResponseEntity<List<NoticeResponse>> findAll(){
-        List<NoticeResponse> list = listNoticeService.execute();
+        List<NoticeResponse> list = (List<NoticeResponse>) listNoticeService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
