@@ -30,10 +30,7 @@ public class ExceptionFilter extends OncePerRequestFilter {
         response.setStatus(errorCode.getStatus());
         response.setContentType("application/json; charset=utf-8");
 
-        ErrorMessage errorMessage = ErrorMessage.builder()
-                .status(errorCode.getStatus())
-                .message(errorCode.getMessage())
-                .build();
+        ErrorMessage errorMessage = new ErrorMessage(errorCode);
 
         String errorResponseEntityToJson = objectMapper.writeValueAsString(errorMessage);
         response.getWriter().write(errorResponseEntityToJson);
