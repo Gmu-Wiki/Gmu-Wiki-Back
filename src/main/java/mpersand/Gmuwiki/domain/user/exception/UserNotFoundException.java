@@ -1,4 +1,4 @@
-package mpersand.Gmuwiki.domain.auth.exception;
+package mpersand.Gmuwiki.domain.user.exception;
 
 import lombok.Getter;
 import mpersand.Gmuwiki.global.error.ErrorCode;
