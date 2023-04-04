@@ -19,6 +19,7 @@ public class OneNoticeService {
         NoticeDetailResponse noticeIdResponse = NoticeDetailResponse.builder()
                 .id(notice.getId())
                 .content(notice.getContent())
+                .name(notice.getName())
                 .title(notice.getTitle())
                 .build();
 
