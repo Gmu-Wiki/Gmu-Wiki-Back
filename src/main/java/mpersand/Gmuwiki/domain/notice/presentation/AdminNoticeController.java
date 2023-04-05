@@ -2,9 +2,11 @@ package mpersand.Gmuwiki.domain.notice.presentation;
 
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.request.CreateNoticeRequest;
+import mpersand.Gmuwiki.domain.notice.presentation.dto.request.EditNoticeRequest;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeDetailResponse;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeListResponse;
 import mpersand.Gmuwiki.domain.notice.service.CreateNoticeService;
+import mpersand.Gmuwiki.domain.notice.service.EditNoticeService;
 import mpersand.Gmuwiki.domain.notice.service.ListNoticeService;
 import mpersand.Gmuwiki.domain.notice.service.OneNoticeService;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ public class AdminNoticeController {
     private final ListNoticeService listNoticeService;
     private final OneNoticeService oneNoticeService;
     private final CreateNoticeService createNoticeService;
+    private final EditNoticeService editNoticeService;
 
     @GetMapping
     public ResponseEntity<NoticeListResponse> findAll(){
@@ -38,5 +41,11 @@ public class AdminNoticeController {
     public ResponseEntity<Void> create(@RequestBody @Valid CreateNoticeRequest createNoticeRequest){
         createNoticeService.execute(createNoticeRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> edit(@PathVariable Long id, @RequestBody @Valid EditNoticeRequest editNoticeRequest){
+        editNoticeService.execute(id, editNoticeRequest);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
