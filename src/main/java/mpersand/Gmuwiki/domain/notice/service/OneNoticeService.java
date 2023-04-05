@@ -2,6 +2,7 @@ package mpersand.Gmuwiki.domain.notice.service;
 
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.notice.entity.Notice;
+import mpersand.Gmuwiki.domain.notice.exception.NoticeNotFoundException;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeDetailResponse;
 import mpersand.Gmuwiki.domain.notice.repository.NoticeRepository;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class OneNoticeService {
     @Transactional(readOnly = true)
     public NoticeDetailResponse execute(Long id) {
         Notice notice = noticeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException());
+                .orElseThrow(() -> new NoticeNotFoundException("게시글을 찾을수 없습니다"));
         NoticeDetailResponse noticeDetailResponse = NoticeDetailResponse.builder()
                 .id(notice.getId())
                 .content(notice.getContent())
