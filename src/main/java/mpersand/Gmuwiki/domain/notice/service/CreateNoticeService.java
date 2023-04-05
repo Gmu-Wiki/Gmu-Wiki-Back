@@ -9,6 +9,8 @@ import mpersand.Gmuwiki.global.util.UserUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class CreateNoticeService {
@@ -22,8 +24,9 @@ public class CreateNoticeService {
         Notice notice = Notice.builder()
                 .title(createNoticeRequest.getTitle())
                 .content(createNoticeRequest.getContent())
-                .name(createNoticeRequest.getName())
-                .user(user)
+                .name(user.getName())
+                .createdDate(LocalDateTime.now())
+                .editedDate(LocalDateTime.now())
                 .build();
         noticeRepository.save(notice);
     }
