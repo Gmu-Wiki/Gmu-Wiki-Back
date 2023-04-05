@@ -36,9 +36,9 @@ public class Notice {
 
     private LocalDateTime editedDate;
 
-    public void update(EditNoticeRequest modifyNoticeRequest) {
-        this.title = modifyNoticeRequest.getTitle();
-        this.content = modifyNoticeRequest.getContent();
+    public void update(EditNoticeRequest editNoticeRequest) {
+        this.title = editNoticeRequest.getTitle();
+        this.content = editNoticeRequest.getContent();
     }
 
 }
