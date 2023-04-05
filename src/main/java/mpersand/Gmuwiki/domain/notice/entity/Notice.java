@@ -2,8 +2,8 @@ package mpersand.Gmuwiki.domain.notice.entity;
 
 import lombok.*;
 import mpersand.Gmuwiki.domain.user.entity.User;
-
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -23,6 +23,7 @@ public class Notice {
     @Column(nullable = false)
     private String content;
 
+
     @Column(nullable = false)
     private String name;
 
@@ -30,5 +31,8 @@ public class Notice {
     @JoinColumn(name = "id")
     private User user;
 
+    private LocalDateTime createdDate;
+
+    private LocalDateTime editedDate;
 
 }
