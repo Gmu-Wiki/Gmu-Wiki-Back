@@ -16,13 +16,13 @@ public class OneNoticeService {
     public NoticeDetailResponse execute(Long id) {
         Notice notice = noticeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException());
-        NoticeDetailResponse noticeIdResponse = NoticeDetailResponse.builder()
+        NoticeDetailResponse noticeDetailResponse = NoticeDetailResponse.builder()
                 .id(notice.getId())
                 .content(notice.getContent())
                 .name(notice.getName())
                 .title(notice.getTitle())
                 .build();
 
-        return noticeIdResponse;
+        return noticeDetailResponse;
     }
 }
