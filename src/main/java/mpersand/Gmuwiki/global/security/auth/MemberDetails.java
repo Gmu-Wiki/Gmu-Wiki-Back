@@ -16,6 +16,7 @@ public class MemberDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {return Collections.singleton(user.getRole()); }
+
     @Override
     public String getPassword() {
         return user.getPassword();

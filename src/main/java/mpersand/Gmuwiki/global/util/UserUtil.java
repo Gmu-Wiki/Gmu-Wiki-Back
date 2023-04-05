@@ -2,7 +2,7 @@ package mpersand.Gmuwiki.global.util;
 
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.auth.exception.MisMatchPasswordException;
-import mpersand.Gmuwiki.domain.auth.exception.UserNotFoundException;
+import mpersand.Gmuwiki.domain.user.exception.UserNotFoundException;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import mpersand.Gmuwiki.domain.user.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
