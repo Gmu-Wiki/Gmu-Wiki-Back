@@ -1,6 +1,7 @@
 package mpersand.Gmuwiki.domain.notice.entity;
 
 import lombok.*;
+import mpersand.Gmuwiki.domain.notice.presentation.dto.request.EditNoticeRequest;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -34,5 +35,10 @@ public class Notice {
     private LocalDateTime createdDate;
 
     private LocalDateTime editedDate;
+
+    public void update(EditNoticeRequest modifyNoticeRequest) {
+        this.title = modifyNoticeRequest.getTitle();
+        this.content = modifyNoticeRequest.getContent();
+    }
 
 }
