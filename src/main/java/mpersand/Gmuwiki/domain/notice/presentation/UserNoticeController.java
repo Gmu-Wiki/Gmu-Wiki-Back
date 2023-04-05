@@ -1,7 +1,6 @@
 package mpersand.Gmuwiki.domain.notice.presentation;
 
 import lombok.RequiredArgsConstructor;
-import mpersand.Gmuwiki.domain.notice.presentation.dto.request.CreateNoticeRequest;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeDetailResponse;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeListResponse;
 import mpersand.Gmuwiki.domain.notice.service.CreateNoticeService;
