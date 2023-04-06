@@ -16,7 +16,7 @@ public class EditNoticeService {
     @Transactional(rollbackFor = Exception.class)
     public void execute(Long id, EditNoticeRequest editNoticeRequest){
         Notice notice = noticeRepository.findById(id)
-                .orElseThrow(()-> new NoticeNotFoundException("게시글을 찾을수 없습니다"));
+                .orElseThrow(()-> new NoticeNotFoundException());
         notice.update(editNoticeRequest);
     }
 }

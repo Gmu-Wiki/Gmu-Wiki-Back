@@ -17,7 +17,7 @@ public class OneNoticeService {
     @Transactional(readOnly = true)
     public NoticeDetailResponse execute(Long id) {
         Notice notice = noticeRepository.findById(id)
-                .orElseThrow(() -> new NoticeNotFoundException("게시글을 찾을수 없습니다"));
+                .orElseThrow(() -> new NoticeNotFoundException());
         NoticeDetailResponse noticeDetailResponse = NoticeDetailResponse.builder()
                 .id(notice.getId())
                 .content(notice.getContent())
