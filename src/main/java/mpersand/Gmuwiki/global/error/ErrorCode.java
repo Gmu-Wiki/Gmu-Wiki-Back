@@ -20,7 +20,8 @@ public enum ErrorCode {
     REFRESH_TOKEN_NOT_FOUND("존재하지 않는 리프레시 토큰입니다.", 404),
     BLACKLIST_ALREADY_EXIST("블랙리스트에 이미 등록되었습니다.",400),
     EMAIL_SEND_FAIL("메일 발송에 실패했습니다", 500),
-    UNKNOWN_ERROR("알 수 없는 에러입니다.", 500);
+    UNKNOWN_ERROR("알 수 없는 에러입니다.", 500),
+    NOTICE_NOT_FOUND("공지글을 찾을수 없습니다", 404);
 
     private final String message;
     private final int status;

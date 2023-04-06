@@ -25,6 +25,7 @@ public class CreateNoticeService {
                 .title(createNoticeRequest.getTitle())
                 .content(createNoticeRequest.getContent())
                 .name(user.getName())
+                .user(user)
                 .createdDate(LocalDateTime.now())
                 .editedDate(LocalDateTime.now())
                 .build();
