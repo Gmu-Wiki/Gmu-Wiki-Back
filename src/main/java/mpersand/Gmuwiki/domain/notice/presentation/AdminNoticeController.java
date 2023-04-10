@@ -23,7 +23,6 @@ public class AdminNoticeController {
     private final EditNoticeService editNoticeService;
     private final DeleteNoticeService deleteNoticeService;
 
-
     @GetMapping
     public ResponseEntity<NoticeListResponse> findAll(){
         var list = listNoticeService.execute();
@@ -53,6 +52,4 @@ public class AdminNoticeController {
         deleteNoticeService.execute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 }

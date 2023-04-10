@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class DeleteNoticeService {
 
     private final NoticeRepository noticeRepository;
-    private final UserUtil userUtil;
 
     @Transactional(rollbackFor = Exception.class)
     public void execute(Long id){
