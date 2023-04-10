@@ -5,10 +5,7 @@ import mpersand.Gmuwiki.domain.notice.presentation.dto.request.CreateNoticeReque
 import mpersand.Gmuwiki.domain.notice.presentation.dto.request.EditNoticeRequest;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeDetailResponse;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeListResponse;
-import mpersand.Gmuwiki.domain.notice.service.CreateNoticeService;
-import mpersand.Gmuwiki.domain.notice.service.EditNoticeService;
-import mpersand.Gmuwiki.domain.notice.service.ListNoticeService;
-import mpersand.Gmuwiki.domain.notice.service.OneNoticeService;
+import mpersand.Gmuwiki.domain.notice.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +21,7 @@ public class AdminNoticeController {
     private final OneNoticeService oneNoticeService;
     private final CreateNoticeService createNoticeService;
     private final EditNoticeService editNoticeService;
+    private final DeleteNoticeService deleteNoticeService;
 
     @GetMapping
     public ResponseEntity<NoticeListResponse> findAll(){
@@ -46,6 +44,12 @@ public class AdminNoticeController {
     @PatchMapping("/{id}")
     public ResponseEntity<Void> edit(@PathVariable Long id, @RequestBody @Valid EditNoticeRequest editNoticeRequest){
         editNoticeService.execute(id, editNoticeRequest);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        deleteNoticeService.execute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

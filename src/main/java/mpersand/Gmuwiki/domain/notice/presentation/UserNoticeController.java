@@ -19,7 +19,6 @@ public class UserNoticeController {
 
     private final ListNoticeService listNoticeService;
     private final OneNoticeService oneNoticeService;
-    private final CreateNoticeService createNoticeService;
 
     @GetMapping
     public ResponseEntity<NoticeListResponse> findAll(){
