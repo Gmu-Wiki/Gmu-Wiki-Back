@@ -1,4 +1,4 @@
-package mpersand.Gmuwiki.domain.board.exception.dto.request;
+package mpersand.Gmuwiki.domain.board.presentation.dto.request;
 
 import lombok.*;
 

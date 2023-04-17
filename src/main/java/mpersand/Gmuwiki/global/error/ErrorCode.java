@@ -21,7 +21,8 @@ public enum ErrorCode {
     BLACKLIST_ALREADY_EXIST("블랙리스트에 이미 등록되었습니다.",400),
     EMAIL_SEND_FAIL("메일 발송에 실패했습니다", 500),
     UNKNOWN_ERROR("알 수 없는 에러입니다.", 500),
-    NOTICE_NOT_FOUND("공지글을 찾을수 없습니다", 404);
+    NOTICE_NOT_FOUND("공지글을 찾을수 없습니다", 404),
+    ALREADY_EXIST_TITLE("이미 존재하는 제목입니다.", 409);
 
     private final String message;
     private final int status;
