@@ -27,8 +27,8 @@ public class AdminBoardController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/{boardType}")
-    public ResponseEntity<ListBoardResponse> findAll(@PathVariable("boardType") BoardType boardType) {
+    @GetMapping
+    public ResponseEntity<ListBoardResponse> findAll(@RequestParam BoardType boardType) {
         var list = listBoardService.execute(boardType);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
