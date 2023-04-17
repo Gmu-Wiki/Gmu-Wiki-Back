@@ -23,7 +23,7 @@ public class Board {
     @Column(name = "board_id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String title;
 
     @Column(nullable = false)
