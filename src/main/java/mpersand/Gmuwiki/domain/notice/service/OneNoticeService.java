@@ -16,13 +16,15 @@ public class OneNoticeService {
 
     @Transactional(readOnly = true)
     public NoticeDetailResponse execute(Long id) {
+
         Notice notice = noticeRepository.findById(id)
                 .orElseThrow(() -> new NoticeNotFoundException());
+
         NoticeDetailResponse noticeDetailResponse = NoticeDetailResponse.builder()
-                .id(notice.getId())
-                .content(notice.getContent())
-                .name(notice.getName())
                 .title(notice.getTitle())
+                .content(notice.getContent())
+                .createdDate(notice.getCreatedDate())
+                .editedDate(notice.getEditedDate())
                 .build();
 
         return noticeDetailResponse;
