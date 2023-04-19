@@ -39,7 +39,7 @@ public class AdminBoardController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DetailBoardResponse> findOne(@PathVariable("id") Long id) {
-        DetailBoardResponse detailBoardResponse = oneBoardService.execute(id);
-        return new ResponseEntity<>(detailBoardResponse, HttpStatus.OK);
+        DetailBoardResponse oneFindById = oneBoardService.execute(id);
+        return new ResponseEntity<>(oneFindById, HttpStatus.OK);
     }
 }
