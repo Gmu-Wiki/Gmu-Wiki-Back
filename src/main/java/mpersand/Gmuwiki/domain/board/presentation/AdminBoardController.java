@@ -6,6 +6,7 @@ import mpersand.Gmuwiki.domain.board.presentation.dto.request.CreateBoardRequest
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.DetailBoardResponse;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListBoardResponse;
 import mpersand.Gmuwiki.domain.board.service.CreateBoardService;
+import mpersand.Gmuwiki.domain.board.service.DeleteBoardService;
 import mpersand.Gmuwiki.domain.board.service.ListBoardService;
 import mpersand.Gmuwiki.domain.board.service.OneBoardService;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,8 @@ public class AdminBoardController {
 
     private final OneBoardService oneBoardService;
 
+    private final DeleteBoardService deleteBoardService;
+
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest) {
         createBoardService.execute(createBoardRequest);
@@ -41,5 +44,11 @@ public class AdminBoardController {
     public ResponseEntity<DetailBoardResponse> findOne(@PathVariable("id") Long id) {
         DetailBoardResponse oneFindById = oneBoardService.execute(id);
         return new ResponseEntity<>(oneFindById, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        deleteBoardService.execute(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
