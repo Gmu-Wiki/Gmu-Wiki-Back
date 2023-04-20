@@ -5,10 +5,7 @@ import mpersand.Gmuwiki.domain.board.enums.BoardType;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.CreateBoardRequest;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.DetailBoardResponse;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListBoardResponse;
-import mpersand.Gmuwiki.domain.board.service.CreateBoardService;
-import mpersand.Gmuwiki.domain.board.service.DeleteBoardService;
-import mpersand.Gmuwiki.domain.board.service.ListBoardService;
-import mpersand.Gmuwiki.domain.board.service.OneBoardService;
+import mpersand.Gmuwiki.domain.board.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +23,7 @@ public class AdminBoardController {
 
     private final OneBoardService oneBoardService;
 
-    private final DeleteBoardService deleteBoardService;
+    private final AdminDeleteBoardService adminDeleteBoardService;
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest) {
@@ -48,7 +45,7 @@ public class AdminBoardController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        deleteBoardService.execute(id);
+        adminDeleteBoardService.execute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
