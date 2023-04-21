@@ -24,7 +24,7 @@ public enum ErrorCode {
     NOTICE_NOT_FOUND("공지글을 찾을 수 없습니다", 404),
     ALREADY_EXIST_TITLE("이미 존재하는 제목입니다.", 409),
     BOARD_NOT_FOUND("게시글을 찾을 수 없습니다.", 404),
-    NOT_MY_BOARD("내가 작성한 글이 아닙니다.", 403);
+    MISMATCH_BOARD_AUTHOR("내가 작성한 글이 아닙니다.", 403);
 
     private final String message;
     private final int status;
