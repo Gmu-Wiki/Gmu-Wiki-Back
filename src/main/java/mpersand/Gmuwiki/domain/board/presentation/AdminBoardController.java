@@ -23,7 +23,7 @@ public class AdminBoardController {
 
     private final OneBoardService oneBoardService;
 
-    private final AdminDeleteBoardService adminDeleteBoardService;
+    private final DeleteBoardAdminService deleteBoardAdminService;
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest) {
@@ -45,7 +45,7 @@ public class AdminBoardController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        adminDeleteBoardService.execute(id);
+        deleteBoardAdminService.execute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
