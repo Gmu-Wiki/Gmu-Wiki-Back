@@ -3,7 +3,7 @@ package mpersand.Gmuwiki.domain.board.service;
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.board.entity.Board;
 import mpersand.Gmuwiki.domain.board.exception.BoardNotFoundException;
-import mpersand.Gmuwiki.domain.board.exception.NotMyBoardException;
+import mpersand.Gmuwiki.domain.board.exception.BoardAuthorMismatchException;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import mpersand.Gmuwiki.global.util.UserUtil;
@@ -26,8 +26,8 @@ public class DeleteBoardService {
 
         User user = userUtil.currentUser();
 
-        if(!board.getUser().getEmail().equals(user.getEmail())) {
-            throw new NotMyBoardException();
+        if(!(board.getUser() == user)) {
+            throw new BoardAuthorMismatchException();
         }
 
         boardRepository.delete(board);
