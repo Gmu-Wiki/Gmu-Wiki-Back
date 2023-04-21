@@ -5,9 +5,9 @@ import mpersand.Gmuwiki.global.error.ErrorCode;
 import mpersand.Gmuwiki.global.error.GimuwikiException;
 
 @Getter
-public class NotMyBoardException extends GimuwikiException {
+public class BoardAuthorMismatchException extends GimuwikiException {
 
-    public NotMyBoardException() {
-        super(ErrorCode.NOT_MY_BOARD);
+    public BoardAuthorMismatchException() {
+        super(ErrorCode.MISMATCH_BOARD_AUTHOR);
     }
 }
