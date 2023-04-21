@@ -41,13 +41,13 @@ public class UserBoardController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DetailBoardResponse> findOne(@PathVariable("id") Long id) {
+    public ResponseEntity<DetailBoardResponse> findOne(@PathVariable Long id) {
         DetailBoardResponse oneFindById = oneBoardService.execute(id);
         return new ResponseEntity<>(oneFindById, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         deleteBoardService.execute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
