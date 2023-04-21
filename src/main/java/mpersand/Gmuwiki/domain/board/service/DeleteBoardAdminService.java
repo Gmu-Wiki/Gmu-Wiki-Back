@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class AdminDeleteBoardService {
+public class DeleteBoardAdminService {
 
     private final BoardRepository boardRepository;
 
