@@ -8,13 +8,12 @@ import mpersand.Gmuwiki.domain.auth.exception.RefreshTokenNotFoundException;
 import mpersand.Gmuwiki.domain.auth.repository.BlackListRepository;
 import mpersand.Gmuwiki.domain.auth.repository.RefreshTokenRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
+import mpersand.Gmuwiki.global.annotation.AnnotationExceptionService;
 import mpersand.Gmuwiki.global.security.jwt.TokenProvider;
 import mpersand.Gmuwiki.global.util.UserUtil;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
 @RequiredArgsConstructor
+@AnnotationExceptionService
 public class UserLogoutService {
 
     private final UserUtil userUtil;
@@ -22,7 +21,6 @@ public class UserLogoutService {
     private final BlackListRepository blackListRepository;
     private final TokenProvider tokenProvider;
 
-    @Transactional(rollbackFor = Exception.class)
     public void execute(String accessToken) {
         User user = userUtil.currentUser();
         String email = user.getEmail();

@@ -6,19 +6,17 @@ import mpersand.Gmuwiki.domain.board.exception.BoardNotFoundException;
 import mpersand.Gmuwiki.domain.board.exception.BoardAuthorMismatchException;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
+import mpersand.Gmuwiki.global.annotation.AnnotationExceptionService;
 import mpersand.Gmuwiki.global.util.UserUtil;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
 @RequiredArgsConstructor
+@AnnotationExceptionService
 public class DeleteBoardService {
 
     private final BoardRepository boardRepository;
 
     private final UserUtil userUtil;
 
-    @Transactional(rollbackFor = Exception.class)
     public void execute(Long id) {
 
         Board board = boardRepository.findById(id)

@@ -7,20 +7,18 @@ import mpersand.Gmuwiki.domain.email.entity.EmailAuth;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import mpersand.Gmuwiki.domain.user.enums.Role;
 import mpersand.Gmuwiki.domain.user.repository.UserRepository;
+import mpersand.Gmuwiki.global.annotation.AnnotationExceptionService;
 import mpersand.Gmuwiki.global.util.EmailUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
 @RequiredArgsConstructor
+@AnnotationExceptionService
 public class UserSignUpService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final EmailUtil emailUtil;
 
-    @Transactional(rollbackFor = Exception.class)
     public void execute(SignUpRequest signUpRequest) {
 
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {

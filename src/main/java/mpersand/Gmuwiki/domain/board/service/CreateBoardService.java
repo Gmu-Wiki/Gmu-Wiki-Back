@@ -7,13 +7,12 @@ import mpersand.Gmuwiki.domain.board.exception.ExistTitleException;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.CreateBoardRequest;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
+import mpersand.Gmuwiki.global.annotation.AnnotationExceptionService;
 import mpersand.Gmuwiki.global.util.UserUtil;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 
-@Service
 @RequiredArgsConstructor
+@AnnotationExceptionService
 public class CreateBoardService {
 
     private final UserUtil userUtil;

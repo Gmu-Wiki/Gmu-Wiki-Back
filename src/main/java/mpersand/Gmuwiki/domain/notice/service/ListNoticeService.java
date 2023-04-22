@@ -4,21 +4,18 @@ import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.notice.entity.Notice;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeListResponse;
 import mpersand.Gmuwiki.domain.notice.repository.NoticeRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import mpersand.Gmuwiki.global.annotation.AnnotationReadOnlyService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeResponse.toResponse;
 
-
-@Service
 @RequiredArgsConstructor
+@AnnotationReadOnlyService
 public class ListNoticeService {
     private final NoticeRepository noticeRepository;
 
-    @Transactional(readOnly = true)
     public NoticeListResponse execute() {
 
         List<Notice> notices = noticeRepository.findAll();
