@@ -5,16 +5,15 @@ import mpersand.Gmuwiki.domain.auth.entity.RefreshToken;
 import mpersand.Gmuwiki.domain.auth.exception.RefreshTokenNotFoundException;
 import mpersand.Gmuwiki.domain.auth.presentation.dto.response.NewTokenResponse;
 import mpersand.Gmuwiki.domain.auth.repository.RefreshTokenRepository;
+import mpersand.Gmuwiki.global.annotation.RollbackService;
 import mpersand.Gmuwiki.global.security.exception.TokenNotValidException;
 import mpersand.Gmuwiki.global.security.jwt.TokenProvider;
 import mpersand.Gmuwiki.global.security.jwt.properties.JwtProperties;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
 
-@Service
 @RequiredArgsConstructor
+@RollbackService
 public class TokenReissueService {
 
     private final RefreshTokenRepository refreshTokenRepository;

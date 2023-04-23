@@ -5,16 +5,14 @@ import mpersand.Gmuwiki.domain.board.entity.Board;
 import mpersand.Gmuwiki.domain.board.exception.BoardNotFoundException;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.DetailBoardResponse;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import mpersand.Gmuwiki.global.annotation.ReadOnlyService;
 
-@Service
 @RequiredArgsConstructor
+@ReadOnlyService
 public class OneBoardService {
 
     private final BoardRepository boardRepository;
 
-    @Transactional(readOnly = true)
     public DetailBoardResponse execute(Long id) {
 
         Board board = boardRepository.findById(id)
