@@ -5,5 +5,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
-public @interface ExceptionServiceAnnotation {
+public @interface RollbackService {
 }

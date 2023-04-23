@@ -5,7 +5,7 @@ import mpersand.Gmuwiki.domain.board.entity.Board;
 import mpersand.Gmuwiki.domain.board.enums.BoardType;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListBoardResponse;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
-import mpersand.Gmuwiki.global.annotation.ReadOnlyServiceAnnotation;
+import mpersand.Gmuwiki.global.annotation.ReadOnlyService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import static mpersand.Gmuwiki.domain.board.presentation.dto.response.BoardResponse.toResponse;
 
 @RequiredArgsConstructor
-@ReadOnlyServiceAnnotation
+@ReadOnlyService
 public class ListBoardService {
 
     private final BoardRepository boardRepository;

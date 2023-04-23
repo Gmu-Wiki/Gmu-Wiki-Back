@@ -5,10 +5,10 @@ import mpersand.Gmuwiki.domain.board.entity.Board;
 import mpersand.Gmuwiki.domain.board.exception.BoardNotFoundException;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.DetailBoardResponse;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
-import mpersand.Gmuwiki.global.annotation.ReadOnlyServiceAnnotation;
+import mpersand.Gmuwiki.global.annotation.ReadOnlyService;
 
 @RequiredArgsConstructor
-@ReadOnlyServiceAnnotation
+@ReadOnlyService
 public class OneBoardService {
 
     private final BoardRepository boardRepository;

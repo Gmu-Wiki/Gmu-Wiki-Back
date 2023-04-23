@@ -6,13 +6,13 @@ import mpersand.Gmuwiki.domain.auth.presentation.dto.request.LoginRequest;
 import mpersand.Gmuwiki.domain.auth.presentation.dto.response.LoginResponse;
 import mpersand.Gmuwiki.domain.auth.repository.RefreshTokenRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
-import mpersand.Gmuwiki.global.annotation.ExceptionServiceAnnotation;
+import mpersand.Gmuwiki.global.annotation.RollbackService;
 import mpersand.Gmuwiki.global.security.jwt.TokenProvider;
 import mpersand.Gmuwiki.global.security.jwt.properties.JwtProperties;
 import mpersand.Gmuwiki.global.util.UserUtil;
 
 @RequiredArgsConstructor
-@ExceptionServiceAnnotation
+@RollbackService
 public class UserLoginService {
 
     private final UserUtil userUtil;

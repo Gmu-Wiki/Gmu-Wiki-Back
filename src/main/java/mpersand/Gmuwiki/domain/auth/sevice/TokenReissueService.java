@@ -5,7 +5,7 @@ import mpersand.Gmuwiki.domain.auth.entity.RefreshToken;
 import mpersand.Gmuwiki.domain.auth.exception.RefreshTokenNotFoundException;
 import mpersand.Gmuwiki.domain.auth.presentation.dto.response.NewTokenResponse;
 import mpersand.Gmuwiki.domain.auth.repository.RefreshTokenRepository;
-import mpersand.Gmuwiki.global.annotation.ExceptionServiceAnnotation;
+import mpersand.Gmuwiki.global.annotation.RollbackService;
 import mpersand.Gmuwiki.global.security.exception.TokenNotValidException;
 import mpersand.Gmuwiki.global.security.jwt.TokenProvider;
 import mpersand.Gmuwiki.global.security.jwt.properties.JwtProperties;
@@ -13,7 +13,7 @@ import mpersand.Gmuwiki.global.security.jwt.properties.JwtProperties;
 import java.time.ZonedDateTime;
 
 @RequiredArgsConstructor
-@ExceptionServiceAnnotation
+@RollbackService
 public class TokenReissueService {
 
     private final RefreshTokenRepository refreshTokenRepository;
