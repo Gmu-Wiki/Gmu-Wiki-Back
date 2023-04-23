@@ -4,12 +4,12 @@ import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.auth.exception.MisMatchPasswordException;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import mpersand.Gmuwiki.domain.user.presentation.dto.request.ChangePasswordRequest;
-import mpersand.Gmuwiki.global.annotation.AnnotationExceptionService;
+import mpersand.Gmuwiki.global.annotation.ExceptionServiceAnnotation;
 import mpersand.Gmuwiki.global.util.UserUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @RequiredArgsConstructor
-@AnnotationExceptionService
+@ExceptionServiceAnnotation
 public class ChangePasswordService {
 
     private final PasswordEncoder passwordEncoder;

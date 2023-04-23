@@ -6,11 +6,11 @@ import mpersand.Gmuwiki.domain.board.exception.BoardNotFoundException;
 import mpersand.Gmuwiki.domain.board.exception.BoardAuthorMismatchException;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
-import mpersand.Gmuwiki.global.annotation.AnnotationExceptionService;
+import mpersand.Gmuwiki.global.annotation.ExceptionServiceAnnotation;
 import mpersand.Gmuwiki.global.util.UserUtil;
 
 @RequiredArgsConstructor
-@AnnotationExceptionService
+@ExceptionServiceAnnotation
 public class DeleteBoardService {
 
     private final BoardRepository boardRepository;

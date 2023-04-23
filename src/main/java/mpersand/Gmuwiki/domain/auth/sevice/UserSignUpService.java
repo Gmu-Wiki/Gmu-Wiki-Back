@@ -7,12 +7,12 @@ import mpersand.Gmuwiki.domain.email.entity.EmailAuth;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import mpersand.Gmuwiki.domain.user.enums.Role;
 import mpersand.Gmuwiki.domain.user.repository.UserRepository;
-import mpersand.Gmuwiki.global.annotation.AnnotationExceptionService;
+import mpersand.Gmuwiki.global.annotation.ExceptionServiceAnnotation;
 import mpersand.Gmuwiki.global.util.EmailUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @RequiredArgsConstructor
-@AnnotationExceptionService
+@ExceptionServiceAnnotation
 public class UserSignUpService {
 
     private final PasswordEncoder passwordEncoder;

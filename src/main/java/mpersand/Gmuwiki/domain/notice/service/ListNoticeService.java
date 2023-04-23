@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.notice.entity.Notice;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeListResponse;
 import mpersand.Gmuwiki.domain.notice.repository.NoticeRepository;
-import mpersand.Gmuwiki.global.annotation.AnnotationReadOnlyService;
+import mpersand.Gmuwiki.global.annotation.ReadOnlyServiceAnnotation;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeResponse.toResponse;
 
 @RequiredArgsConstructor
-@AnnotationReadOnlyService
+@ReadOnlyServiceAnnotation
 public class ListNoticeService {
     private final NoticeRepository noticeRepository;
 

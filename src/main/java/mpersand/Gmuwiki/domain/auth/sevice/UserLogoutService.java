@@ -8,12 +8,12 @@ import mpersand.Gmuwiki.domain.auth.exception.RefreshTokenNotFoundException;
 import mpersand.Gmuwiki.domain.auth.repository.BlackListRepository;
 import mpersand.Gmuwiki.domain.auth.repository.RefreshTokenRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
-import mpersand.Gmuwiki.global.annotation.AnnotationExceptionService;
+import mpersand.Gmuwiki.global.annotation.ExceptionServiceAnnotation;
 import mpersand.Gmuwiki.global.security.jwt.TokenProvider;
 import mpersand.Gmuwiki.global.util.UserUtil;
 
 @RequiredArgsConstructor
-@AnnotationExceptionService
+@ExceptionServiceAnnotation
 public class UserLogoutService {
 
     private final UserUtil userUtil;

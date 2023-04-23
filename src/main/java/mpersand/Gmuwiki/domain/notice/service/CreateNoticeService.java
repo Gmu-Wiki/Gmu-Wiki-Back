@@ -5,13 +5,13 @@ import mpersand.Gmuwiki.domain.notice.entity.Notice;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.request.CreateNoticeRequest;
 import mpersand.Gmuwiki.domain.notice.repository.NoticeRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
-import mpersand.Gmuwiki.global.annotation.AnnotationExceptionService;
+import mpersand.Gmuwiki.global.annotation.ExceptionServiceAnnotation;
 import mpersand.Gmuwiki.global.util.UserUtil;
 
 import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
-@AnnotationExceptionService
+@ExceptionServiceAnnotation
 public class CreateNoticeService {
     private final UserUtil userUtil;
     private final NoticeRepository noticeRepository;

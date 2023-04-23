@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.notice.entity.Notice;
 import mpersand.Gmuwiki.domain.notice.exception.NoticeNotFoundException;
 import mpersand.Gmuwiki.domain.notice.repository.NoticeRepository;
-import mpersand.Gmuwiki.global.annotation.AnnotationExceptionService;
+import mpersand.Gmuwiki.global.annotation.ExceptionServiceAnnotation;
 
 @RequiredArgsConstructor
-@AnnotationExceptionService
+@ExceptionServiceAnnotation
 public class DeleteNoticeService {
 
     private final NoticeRepository noticeRepository;

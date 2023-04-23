@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.board.entity.Board;
 import mpersand.Gmuwiki.domain.board.exception.BoardNotFoundException;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
-import mpersand.Gmuwiki.global.annotation.AnnotationExceptionService;
+import mpersand.Gmuwiki.global.annotation.ExceptionServiceAnnotation;
 
 @RequiredArgsConstructor
-@AnnotationExceptionService
+@ExceptionServiceAnnotation
 public class DeleteBoardAdminService {
 
     private final BoardRepository boardRepository;

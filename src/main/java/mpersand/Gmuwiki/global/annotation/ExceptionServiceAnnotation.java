@@ -4,6 +4,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional(readOnly = true)
-public @interface AnnotationReadOnlyService {
+@Transactional(rollbackFor = Exception.class)
+public @interface ExceptionServiceAnnotation {
 }

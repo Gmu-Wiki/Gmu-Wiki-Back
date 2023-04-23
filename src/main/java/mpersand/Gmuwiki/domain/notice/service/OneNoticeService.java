@@ -5,10 +5,10 @@ import mpersand.Gmuwiki.domain.notice.entity.Notice;
 import mpersand.Gmuwiki.domain.notice.exception.NoticeNotFoundException;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeDetailResponse;
 import mpersand.Gmuwiki.domain.notice.repository.NoticeRepository;
-import mpersand.Gmuwiki.global.annotation.AnnotationReadOnlyService;
+import mpersand.Gmuwiki.global.annotation.ReadOnlyServiceAnnotation;
 
 @RequiredArgsConstructor
-@AnnotationReadOnlyService
+@ReadOnlyServiceAnnotation
 public class OneNoticeService {
     private final NoticeRepository noticeRepository;
 
