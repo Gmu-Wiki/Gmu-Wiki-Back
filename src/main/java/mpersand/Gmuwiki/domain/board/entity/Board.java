@@ -2,6 +2,7 @@ package mpersand.Gmuwiki.domain.board.entity;
 
 import lombok.*;
 import mpersand.Gmuwiki.domain.board.enums.BoardType;
+import mpersand.Gmuwiki.domain.board.presentation.dto.request.EditBoardRequest;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -44,4 +45,9 @@ public class Board {
 
     @LastModifiedDate
     private LocalDateTime editedDate;
+
+    public void update(EditBoardRequest editBoardRequest) {
+        this.title = editBoardRequest.getTitle();
+        this.content = editBoardRequest.getContent();
+    }
 }
