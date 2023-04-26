@@ -2,8 +2,6 @@ package mpersand.Gmuwiki.domain.board.entity;
 
 import lombok.*;
 import mpersand.Gmuwiki.domain.board.enums.BoardType;
-import mpersand.Gmuwiki.domain.board.presentation.dto.request.EditBoardRequest;
-import mpersand.Gmuwiki.domain.user.entity.User;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -17,11 +15,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class Board {
+public class BoardRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_id")
+    @Column(name = "board_version_id")
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -34,8 +32,8 @@ public class Board {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "board_id")
+    private Board board;
 
     @Enumerated(EnumType.STRING)
     private BoardType boardType;
@@ -45,9 +43,4 @@ public class Board {
 
     @LastModifiedDate
     private LocalDateTime editedDate;
-
-    public void update(EditBoardRequest editBoardRequest) {
-        this.title = editBoardRequest.getTitle();
-        this.content = editBoardRequest.getContent();
-    }
 }
