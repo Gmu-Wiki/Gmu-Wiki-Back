@@ -3,6 +3,7 @@ package mpersand.Gmuwiki.domain.board.presentation;
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.board.enums.BoardType;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.CreateBoardRequest;
+import mpersand.Gmuwiki.domain.board.presentation.dto.request.EditBoardRequest;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.DetailBoardResponse;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListBoardResponse;
 import mpersand.Gmuwiki.domain.board.service.*;
@@ -24,6 +25,8 @@ public class AdminBoardController {
     private final OneBoardService oneBoardService;
 
     private final DeleteBoardAdminService deleteBoardAdminService;
+
+    private final EditBoardService editBoardService;
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest) {
@@ -47,5 +50,11 @@ public class AdminBoardController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         deleteBoardAdminService.execute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> edit(@PathVariable Long id, @RequestBody @Valid EditBoardRequest editBoardRequest) {
+        editBoardService.execute(id, editBoardRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
