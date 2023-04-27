@@ -5,6 +5,7 @@ import mpersand.Gmuwiki.domain.board.enums.BoardType;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.CreateBoardRequest;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.EditBoardRequest;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.DetailBoardResponse;
+import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListBoardRecordResponse;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListBoardResponse;
 import mpersand.Gmuwiki.domain.board.service.*;
 import org.springframework.http.HttpStatus;
@@ -22,11 +23,13 @@ public class UserBoardController {
 
     private final ListBoardService listBoardService;
 
-    private final OneBoardService oneBoardService;
+    private final GetBoardDetailService getBoardDetailService;
 
     private final DeleteBoardService deleteBoardService;
 
     private final EditBoardService editBoardService;
+
+    private final ListBoardRecordService listBoardRecordService;
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest) {
@@ -35,14 +38,20 @@ public class UserBoardController {
     }
 
     @GetMapping
-    public ResponseEntity<ListBoardResponse> findAll(@RequestParam BoardType boardType) {
+    public ResponseEntity<ListBoardResponse> findTypeAll(@RequestParam BoardType boardType) {
         var list = listBoardService.execute(boardType);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}/record")
+    public ResponseEntity<ListBoardRecordResponse> findRecordAll(@PathVariable Long id) {
+        var list = listBoardRecordService.execute(id);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<DetailBoardResponse> findOne(@PathVariable Long id) {
-        DetailBoardResponse oneFindById = oneBoardService.execute(id);
+    public ResponseEntity<DetailBoardResponse> findDetailOne(@PathVariable Long id) {
+        DetailBoardResponse oneFindById = getBoardDetailService.execute(id);
         return new ResponseEntity<>(oneFindById, HttpStatus.OK);
     }
 
