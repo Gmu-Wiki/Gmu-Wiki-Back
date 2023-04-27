@@ -23,7 +23,7 @@ public class ListBoardService {
         List<Board> boards = boardRepository.findByBoardType(boardType);
 
         ListBoardResponse listBoardResponse = ListBoardResponse.builder()
-                .list(
+                .boardList(
                         boards.stream()
                                 .map(board -> toResponse(board))
                                 .collect(Collectors.toList())
