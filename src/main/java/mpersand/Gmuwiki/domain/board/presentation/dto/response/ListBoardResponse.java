@@ -11,5 +11,5 @@ import java.util.List;
 @AllArgsConstructor
 public class ListBoardResponse {
 
-    private List<BoardResponse> list;
+    private List<BoardResponse> boardList;
 }
