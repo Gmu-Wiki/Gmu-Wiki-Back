@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
-public class ListBoardResponse {
+public class ListBoardRecordResponse {
 
-    private List<BoardResponse> boardList;
+    private List<BoardRecordResponse> boardRecordList;
 }

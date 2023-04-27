@@ -31,7 +31,7 @@ public class BoardRecord {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "board_id")
     private Board board;
 

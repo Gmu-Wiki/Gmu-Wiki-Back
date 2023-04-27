@@ -9,7 +9,7 @@ import mpersand.Gmuwiki.global.annotation.ReadOnlyService;
 
 @RequiredArgsConstructor
 @ReadOnlyService
-public class OneBoardService {
+public class GetBoardDetailService {
 
     private final BoardRepository boardRepository;
 
