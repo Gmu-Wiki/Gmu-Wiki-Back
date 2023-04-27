@@ -22,12 +22,12 @@ public class EmailController {
     @PostMapping
     public ResponseEntity<Void> sendEmail(@RequestBody @Valid EmailSendRequest emailSendRequest) {
         emailSendService.execute(emailSendRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.HEAD)
     public ResponseEntity<Void> AuthCheck(@Email @RequestParam String email, @RequestParam String authCode) {
         emailCheckService.execute(email, authCode);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

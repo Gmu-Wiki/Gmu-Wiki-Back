@@ -29,7 +29,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<Void> signUp(@RequestBody @Valid SignUpRequest signUpRequest) {
         userSignUpService.execute(signUpRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
@@ -41,14 +41,14 @@ public class AuthController {
     @DeleteMapping
     public ResponseEntity<Void> logout(@RequestHeader("Authorization")String accessToken){
         userLogoutService.execute(accessToken);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
 
     @PatchMapping
     public ResponseEntity<NewTokenResponse> reIssueToken(@RequestHeader("RefreshToken") String token) {
         NewTokenResponse reIssueToken = tokenReissueService.execute(token);
-        return ResponseEntity.ok(reIssueToken);
+        return new ResponseEntity<>(reIssueToken, HttpStatus.OK);
     }
 
 }
