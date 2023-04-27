@@ -29,7 +29,7 @@ public class UserNoticeController {
     @GetMapping("/{id}")
     public ResponseEntity<NoticeDetailResponse> findOne(@PathVariable("id") Long id){
         NoticeDetailResponse oneFindById = oneNoticeService.execute(id);
-        return new ResponseEntity<>(oneFindById,HttpStatus.OK);
+        return new ResponseEntity<>(oneFindById, HttpStatus.OK);
     }
 
 }
