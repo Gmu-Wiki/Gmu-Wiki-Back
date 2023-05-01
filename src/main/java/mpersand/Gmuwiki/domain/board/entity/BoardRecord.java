@@ -19,7 +19,7 @@ public class BoardRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_version_id")
+    @Column(name = "board_record_id")
     private Long id;
 
     @Column(nullable = false, unique = true)
