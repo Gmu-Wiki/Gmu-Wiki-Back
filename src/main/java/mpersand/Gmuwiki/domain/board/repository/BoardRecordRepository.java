@@ -12,4 +12,5 @@ public interface BoardRecordRepository extends JpaRepository<BoardRecord, Long> 
 
     boolean existsByTitle(String title);
 
+    void deleteAllByBoard(Board board);
 }
