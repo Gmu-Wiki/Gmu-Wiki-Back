@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.board.entity.Board;
 import mpersand.Gmuwiki.domain.board.exception.BoardNotFoundException;
 import mpersand.Gmuwiki.domain.board.exception.BoardAuthorMismatchException;
+import mpersand.Gmuwiki.domain.board.repository.BoardRecordRepository;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import mpersand.Gmuwiki.global.annotation.RollbackService;
@@ -14,6 +15,8 @@ import mpersand.Gmuwiki.global.util.UserUtil;
 public class DeleteBoardService {
 
     private final BoardRepository boardRepository;
+
+    private final BoardRecordRepository boardRecordRepository;
 
     private final UserUtil userUtil;
 
@@ -27,6 +30,8 @@ public class DeleteBoardService {
         if(!(board.getUser() == user)) {
             throw new BoardAuthorMismatchException();
         }
+
+        boardRecordRepository.deleteAllByBoard(board);
 
         boardRepository.delete(board);
     }
