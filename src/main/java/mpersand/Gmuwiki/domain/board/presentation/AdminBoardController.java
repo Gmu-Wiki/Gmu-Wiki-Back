@@ -31,6 +31,8 @@ public class AdminBoardController {
 
     private final ListBoardRecordService listBoardRecordService;
 
+    private final GetBoardRecordDetailService getBoardRecordDetailService;
+
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest) {
         createBoardService.execute(createBoardRequest);
@@ -47,6 +49,12 @@ public class AdminBoardController {
     public ResponseEntity<ListBoardRecordResponse> findRecordAll(@PathVariable Long id) {
         var list = listBoardRecordService.execute(id);
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/record/detail")
+    public ResponseEntity<DetailBoardResponse> findRecordDetailOne(@PathVariable Long id) {
+        DetailBoardResponse oneFindById = getBoardRecordDetailService.execute(id);
+        return new ResponseEntity<>(oneFindById, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
