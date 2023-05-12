@@ -25,7 +25,10 @@ public enum ErrorCode {
     ALREADY_EXIST_TITLE("이미 존재하는 제목입니다.", 409),
     BOARD_NOT_FOUND("게시글을 찾을 수 없습니다.", 404),
     MISMATCH_BOARD_AUTHOR("내가 작성한 글이 아닙니다.", 403),
-    BOARD_RECORD_NOT_FOUND("게시글의 기록을 찾을 수 없습니다.", 404);
+    BOARD_RECORD_NOT_FOUND("게시글의 기록을 찾을 수 없습니다.", 404),
+    FILE_UPLOAD_FAIL("파일 업로드에 실패했습니다.", 500),
+    NOT_ALLOWED_FILE("허용되지 않은 파일 형식입니다.", 400),
+    INVALID_FORMAT_FILE("잘못된 형식의 파일입니다.", 400);
 
     private final String message;
     private final int status;
