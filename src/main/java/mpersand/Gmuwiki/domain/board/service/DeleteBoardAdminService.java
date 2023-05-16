@@ -2,13 +2,13 @@ package mpersand.Gmuwiki.domain.board.service;
 
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.board.entity.Board;
-import mpersand.Gmuwiki.domain.board.exception.BoardNotFoundException;
 import mpersand.Gmuwiki.domain.board.repository.BoardRecordRepository;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
 import mpersand.Gmuwiki.domain.file.entity.BoardFile;
 import mpersand.Gmuwiki.domain.file.repository.BoardFileRepository;
 import mpersand.Gmuwiki.domain.file.service.BoardFileService;
 import mpersand.Gmuwiki.global.annotation.RollbackService;
+import mpersand.Gmuwiki.global.util.BoardUtil;
 
 import java.util.List;
 
@@ -24,10 +24,11 @@ public class DeleteBoardAdminService {
 
     private final BoardFileService boardFileService;
 
+    private final BoardUtil boardUtil;
+
     public void execute(Long id) {
 
-        Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new BoardNotFoundException());
+        Board board = boardUtil.findBoardById(id);
 
         List<BoardFile> boardFiles = boardFileRepository.getBoardFileByBoardId(id);
 
