@@ -3,25 +3,23 @@ package mpersand.Gmuwiki.domain.board.service;
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.board.entity.Board;
 import mpersand.Gmuwiki.domain.board.entity.BoardRecord;
-import mpersand.Gmuwiki.domain.board.exception.BoardNotFoundException;
 import mpersand.Gmuwiki.domain.board.exception.ExistTitleException;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.EditBoardRequest;
-import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
 import mpersand.Gmuwiki.domain.board.repository.BoardRecordRepository;
 import mpersand.Gmuwiki.global.annotation.RollbackService;
+import mpersand.Gmuwiki.global.util.BoardUtil;
 
 @RequiredArgsConstructor
 @RollbackService
 public class EditBoardService {
 
-    private final BoardRepository boardRepository;
-
     private final BoardRecordRepository boardRecordRepository;
+
+    private final BoardUtil boardUtil;
 
     public void execute(Long id, EditBoardRequest editBoardRequest) {
 
-        Board board = boardRepository.findById(id)
-                .orElseThrow(()-> new BoardNotFoundException());
+        Board board = boardUtil.findBoardById(id);
 
         if(boardRecordRepository.existsByTitle(editBoardRequest.getTitle())) {
             throw new ExistTitleException();

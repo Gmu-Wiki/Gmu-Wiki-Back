@@ -14,6 +14,7 @@ import static mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeRes
 @RequiredArgsConstructor
 @ReadOnlyService
 public class ListNoticeService {
+
     private final NoticeRepository noticeRepository;
 
     public NoticeListResponse execute() {

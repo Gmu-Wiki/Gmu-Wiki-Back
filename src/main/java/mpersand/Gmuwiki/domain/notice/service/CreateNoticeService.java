@@ -13,10 +13,13 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @RollbackService
 public class CreateNoticeService {
+
     private final UserUtil userUtil;
+
     private final NoticeRepository noticeRepository;
 
     public void execute(CreateNoticeRequest createNoticeRequest){
+
         User user = userUtil.currentUser();
 
         Notice notice = Notice.builder()
@@ -27,6 +30,7 @@ public class CreateNoticeService {
                 .createdDate(LocalDateTime.now())
                 .editedDate(LocalDateTime.now())
                 .build();
+
         noticeRepository.save(notice);
     }
 }
