@@ -5,17 +5,14 @@ import mpersand.Gmuwiki.domain.inquiry.presentation.dto.request.InquirySendReque
 import mpersand.Gmuwiki.domain.inquiry.service.InquirySendService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/inquiry")
-public class InquiryController {
+@RequestMapping("/user/inquiry")
+public class UserInquiryController {
 
     private final InquirySendService inquirySendService;
 
