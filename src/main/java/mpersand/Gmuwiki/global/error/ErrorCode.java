@@ -28,7 +28,8 @@ public enum ErrorCode {
     BOARD_RECORD_NOT_FOUND("게시글의 기록을 찾을 수 없습니다.", 404),
     FILE_UPLOAD_FAIL("파일 업로드에 실패했습니다.", 500),
     NOT_ALLOWED_FILE("허용되지 않은 파일 형식입니다.", 400),
-    INVALID_FORMAT_FILE("잘못된 형식의 파일입니다.", 400);
+    INVALID_FORMAT_FILE("잘못된 형식의 파일입니다.", 400),
+    INQUIRY_NOT_FOUND("문의 사항을 찾을 수 없습니다.", 404);
 
     private final String message;
     private final int status;
