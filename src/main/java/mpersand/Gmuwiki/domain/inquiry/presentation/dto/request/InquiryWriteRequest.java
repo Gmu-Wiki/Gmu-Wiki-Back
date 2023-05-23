@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class InquirySendRequest {
+public class InquiryWriteRequest {
 
     @NotBlank(message = "제목은 필수 입력값입니다.")
     private String title;
