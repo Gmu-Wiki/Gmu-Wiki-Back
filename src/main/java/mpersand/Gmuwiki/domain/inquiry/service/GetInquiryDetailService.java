@@ -21,6 +21,8 @@ public class GetInquiryDetailService {
         DetailInquiryResponse detailInquiryResponse = DetailInquiryResponse.builder()
                 .title(inquiry.getTitle())
                 .content(inquiry.getContent())
+                .inquiryType(inquiry.getInquiryType())
+                .name(inquiry.getName())
                 .build();
 
         return detailInquiryResponse;
