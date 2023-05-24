@@ -31,6 +31,8 @@ public class InquiryRefusalService {
         String inquiryName = inquiry.getTitle();
 
         sendInquiryEmail(email, inquiryName, inquirySendRequest.getComment());
+
+        inquiryRepository.delete(inquiry);
     }
 
     private MimeMessage sendInquiryEmail(String email, String inquiryName, String comment) {
