@@ -30,6 +30,8 @@ public class InquiryApproveService {
         String inquiryName = inquiry.getTitle();
 
         sendInquiryEmail(email, inquiryName);
+
+        inquiryRepository.delete(inquiry);
     }
 
     private MimeMessage sendInquiryEmail(String email, String inquiryName) {
