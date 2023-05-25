@@ -6,25 +6,21 @@ import mpersand.Gmuwiki.domain.email.exception.EmailSendFailedException;
 import mpersand.Gmuwiki.domain.email.exception.ManyRequestEmailAuthException;
 import mpersand.Gmuwiki.domain.email.presentation.dto.request.EmailSendRequest;
 import mpersand.Gmuwiki.domain.email.repository.EmailAuthRepository;
+import mpersand.Gmuwiki.global.annotation.RollbackService;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Random;
 
-@Service
+@RollbackService
 @RequiredArgsConstructor
 public class EmailSendService {
 
     private final EmailAuthRepository emailAuthRepository;
     private final JavaMailSender javaMailSender;
 
-    @Transactional(rollbackFor = Exception.class)
     public void execute(EmailSendRequest emailSendRequest) {
 
         Random random = new Random();
@@ -81,5 +77,4 @@ public class EmailSendService {
 
         return message;
     }
-
 }

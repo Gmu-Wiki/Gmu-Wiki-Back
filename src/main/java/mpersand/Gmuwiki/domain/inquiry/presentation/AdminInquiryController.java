@@ -2,31 +2,36 @@ package mpersand.Gmuwiki.domain.inquiry.presentation;
 
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.inquiry.presentation.dto.request.InquirySendRequest;
+import mpersand.Gmuwiki.domain.inquiry.presentation.dto.request.InquiryWriteRequest;
 import mpersand.Gmuwiki.domain.inquiry.presentation.dto.response.DetailInquiryResponse;
 import mpersand.Gmuwiki.domain.inquiry.presentation.dto.response.ListInquiryResponse;
-import mpersand.Gmuwiki.domain.inquiry.service.GetInquiryDetailService;
-import mpersand.Gmuwiki.domain.inquiry.service.InquirySendService;
-import mpersand.Gmuwiki.domain.inquiry.service.ListInquiryService;
+import mpersand.Gmuwiki.domain.inquiry.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin/inquiry")
 public class AdminInquiryController {
 
-    private final InquirySendService inquirySendService;
+    private final CreateInquiryService createInquiryService;
 
     private final ListInquiryService listInquiryService;
 
     private final GetInquiryDetailService getInquiryDetailService;
 
+    private final InquiryApproveService inquiryApproveService;
+
+    private final InquiryRefusalService inquiryRefusalService;
+
     @PostMapping
-    public ResponseEntity<Void> send(@RequestBody @Valid InquirySendRequest inquirySendRequest) {
-        inquirySendService.execute(inquirySendRequest);
+    public ResponseEntity<Void> create(@RequestPart("InquiryCreate") @Valid InquiryWriteRequest inquiryWriteRequest, @RequestPart(name = "file", required = false) List<MultipartFile> files) {
+        createInquiryService.execute(inquiryWriteRequest, files);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -40,5 +45,17 @@ public class AdminInquiryController {
     public ResponseEntity<DetailInquiryResponse> findDetailOne(@PathVariable Long id) {
         DetailInquiryResponse oneFindById = getInquiryDetailService.execute(id);
         return new ResponseEntity<>(oneFindById, HttpStatus.OK);
+    }
+
+    @PostMapping("/approve/{id}")
+    public ResponseEntity<Void> approveSend(@PathVariable Long id) {
+        inquiryApproveService.execute(id);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/refusal/{id}")
+    public ResponseEntity<Void> refusalSend(@PathVariable Long id, @RequestBody @Valid InquirySendRequest inquirySendRequest) {
+        inquiryRefusalService.execute(id, inquirySendRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

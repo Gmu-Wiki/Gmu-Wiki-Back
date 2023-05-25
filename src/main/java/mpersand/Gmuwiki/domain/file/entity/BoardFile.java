@@ -2,6 +2,7 @@ package mpersand.Gmuwiki.domain.file.entity;
 
 import lombok.*;
 import mpersand.Gmuwiki.domain.board.entity.Board;
+import mpersand.Gmuwiki.domain.inquiry.entity.Inquiry;
 
 import javax.persistence.*;
 
@@ -20,6 +21,10 @@ public class BoardFile {
     @ManyToOne
     @JoinColumn(name = "board_id")
     private Board board;
+
+    @ManyToOne
+    @JoinColumn(name = "inquiry_id")
+    private Inquiry inquiry;
 
     @Column(name = "board_file_url")
     private String url;
