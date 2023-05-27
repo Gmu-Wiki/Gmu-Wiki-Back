@@ -11,10 +11,8 @@ import mpersand.Gmuwiki.domain.board.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,8 +34,8 @@ public class AdminBoardController {
     private final GetBoardRecordDetailService getBoardRecordDetailService;
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestPart("boardCreate") @Valid CreateBoardRequest createBoardRequest, @RequestPart(name = "file", required = false) List<MultipartFile> files) {
-        createBoardService.execute(createBoardRequest, files);
+    public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest) {
+        createBoardService.execute(createBoardRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
