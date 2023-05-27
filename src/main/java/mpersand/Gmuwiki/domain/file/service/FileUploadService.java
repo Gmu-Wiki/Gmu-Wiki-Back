@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.file.exception.FileUploadFailedException;
 import mpersand.Gmuwiki.domain.file.exception.InvalidFormatFileException;
 import mpersand.Gmuwiki.domain.file.exception.NotAllowedFileException;
+import mpersand.Gmuwiki.domain.file.presentation.dto.response.FileUploadResponse;
 import mpersand.Gmuwiki.global.annotation.RollbackService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +23,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @RollbackService
-public class BoardFileService {
+public class FileUploadService {
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
@@ -31,9 +32,9 @@ public class BoardFileService {
 
     private static final List<String> ALLOWED_MIME_TYPES = Arrays.asList("file/jpg", "file/png", "file/gif", "file/mp4");
 
-    public List<String> uploadFile(List<MultipartFile> multipartFile) {
+    public List<FileUploadResponse> execute(List<MultipartFile> multipartFile) {
 
-        List<String> fileNameList = new ArrayList<>();
+        List<FileUploadResponse> fileNameList = new ArrayList<>();
 
         multipartFile.forEach(file -> {
 
@@ -60,7 +61,14 @@ public class BoardFileService {
                 throw new FileUploadFailedException();
             }
 
-            fileNameList.add(fileName);
+            String fileUrl = generateFileUrl(fileName);
+
+            FileUploadResponse fileUploadResponse = FileUploadResponse.builder()
+                    .awsUrl(fileUrl)
+                    .build();
+
+            fileNameList.add(fileUploadResponse);
+
         });
 
         return fileNameList;
@@ -85,5 +93,9 @@ public class BoardFileService {
 
             throw new InvalidFormatFileException();
         }
+    }
+
+    private String generateFileUrl(String fileName) {
+        return amazonS3.getUrl(bucket, fileName).toString();
     }
 }
