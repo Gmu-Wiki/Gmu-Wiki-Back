@@ -33,7 +33,6 @@ public class Notice {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
     @CreatedDate
