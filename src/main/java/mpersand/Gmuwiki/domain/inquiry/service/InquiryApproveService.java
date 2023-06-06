@@ -1,7 +1,7 @@
 package mpersand.Gmuwiki.domain.inquiry.service;
 
 import lombok.RequiredArgsConstructor;
-import mpersand.Gmuwiki.domain.email.exception.EmailSendFailedException;
+import mpersand.Gmuwiki.domain.inquiry.exception.EmailSendFailedException;
 import mpersand.Gmuwiki.domain.inquiry.entity.Inquiry;
 import mpersand.Gmuwiki.domain.inquiry.exception.InquiryNotFoundException;
 import mpersand.Gmuwiki.domain.inquiry.repository.InquiryRepository;
