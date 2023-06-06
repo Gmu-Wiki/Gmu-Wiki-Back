@@ -32,7 +32,6 @@ public class Inquiry {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
     @Enumerated(EnumType.STRING)
