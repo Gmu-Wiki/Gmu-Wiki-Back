@@ -16,6 +16,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -38,6 +39,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+	implementation 'com.github.GSM-MSG:GAuth-SDK-Java:v2.0.0'
 }
 
 tasks.named('test') {
