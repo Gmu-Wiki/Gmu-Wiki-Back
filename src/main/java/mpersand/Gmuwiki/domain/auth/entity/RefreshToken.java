@@ -3,25 +3,22 @@ package mpersand.Gmuwiki.domain.auth.entity;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
-import org.springframework.data.redis.core.TimeToLive;
 import org.springframework.data.redis.core.index.Indexed;
 
+import java.util.UUID;
+
 @Getter
+@Builder
+@RedisHash(value = "refreshToken")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@RedisHash(value = "refreshToken")
 public class RefreshToken {
 
+    @Indexed
     @Id
-    private String email;
+    private String token;
 
     @Indexed
-    private String refreshToken;
+    private UUID userId;
 
-    @TimeToLive
-    private long expiredAt;
-
-    public void exchangeRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
 }
