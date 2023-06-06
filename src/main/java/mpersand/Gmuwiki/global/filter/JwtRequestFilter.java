@@ -1,10 +1,10 @@
 package mpersand.Gmuwiki.global.filter;
 
 import lombok.RequiredArgsConstructor;
-import mpersand.Gmuwiki.global.security.exception.TokenNotValidException;
 import mpersand.Gmuwiki.global.security.jwt.TokenProvider;
-import mpersand.Gmuwiki.global.security.jwt.properties.JwtProperties;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -14,34 +14,29 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final TokenProvider tokenProvider;
-    private final JwtProperties jwtProperties;
 
-    public void registerSecurityContext(HttpServletRequest request, String email) {
-        UsernamePasswordAuthenticationToken authenticationToken = tokenProvider.authenticationToken(email);
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-    }
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String accessToken = request.getHeader("Authorization");
 
-        if (!Objects.isNull(accessToken)) {
-            tokenProvider.extractAllClaims(accessToken, jwtProperties.getAccessSecret());
+        String token = tokenProvider.resolveToken(request);
 
-            if (!tokenProvider.getTokenType(accessToken, jwtProperties.getAccessSecret()).equals("ACCESS_TOKEN")) {
-                throw new TokenNotValidException();
-            }
+        if(token != null && !token.isBlank()) {
 
-            String email = tokenProvider.getUserEmail(accessToken, jwtProperties.getAccessSecret());
-            registerSecurityContext(request, email);
+            Authentication authentication = tokenProvider.authentication(token);
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            log.info("current user email = " + authentication.getName());
         }
+
         filterChain.doFilter(request, response);
     }
 }
