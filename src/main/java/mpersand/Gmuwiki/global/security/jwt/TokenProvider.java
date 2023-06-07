@@ -1,102 +1,157 @@
 package mpersand.Gmuwiki.global.security.jwt;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
-import mpersand.Gmuwiki.global.security.auth.MemberDetailsService;
-import mpersand.Gmuwiki.global.security.exception.TokenExpirationException;
-import mpersand.Gmuwiki.global.security.exception.TokenNotValidException;
-import mpersand.Gmuwiki.global.security.jwt.properties.JwtProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import mpersand.Gmuwiki.domain.auth.exception.RoleNotExistException;
+import mpersand.Gmuwiki.domain.user.enums.Role;
+import mpersand.Gmuwiki.global.security.auth.AuthDetailsService;
+import mpersand.Gmuwiki.global.security.exception.TokenExpirationException;
+import mpersand.Gmuwiki.global.security.exception.TokenNotValidException;
+import mpersand.Gmuwiki.global.security.jwt.properties.JwtProperties;
+import mpersand.Gmuwiki.global.security.jwt.properties.TokenTimeProperties;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
+import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.time.ZonedDateTime;
 import java.util.Date;
+
 
 @Getter
 @Component
 @RequiredArgsConstructor
 public class TokenProvider {
 
-    private final MemberDetailsService memberDetailsService;
     private final JwtProperties jwtProperties;
-    private final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 120;
-    private final long REFRESH_TOKEN_EXPIRE_TIME = ACCESS_TOKEN_EXPIRE_TIME * 12 * 7;
+
+    private final TokenTimeProperties tokenTimeProperties;
+
+    private final AuthDetailsService authDetailsService;
 
     @AllArgsConstructor
-    private enum TokenType {
-        ACCESS_TOKEN("accessToken"),
-        REFRESH_TOKEN("refreshToken");
+    private enum TokenObject {
+        ACCESS_TYPE("access"),
+        REFRESH_TYPE("refresh"),
+        TOKEN_PREFIX("Bearer"),
+        AUTHORITY("authority");
         String value;
     }
 
-    @AllArgsConstructor
-    private enum TokenClaimName {
-        USER_EMAIL("email"),
-        TOKEN_TYPE("tokenType");
-        String value;
+    public ZonedDateTime accessExpiredTime() {
+
+        return ZonedDateTime.now().plusSeconds(tokenTimeProperties.getAccessTime());
     }
 
-    private Key getSignInKey(String secretKey) {
-        byte[] bytes = secretKey.getBytes(StandardCharsets.UTF_8);
-        return Keys.hmacShaKeyFor(bytes);
+    public ZonedDateTime refreshExpiredTime() {
+
+        return ZonedDateTime.now().plusSeconds(tokenTimeProperties.getRefreshTime());
     }
 
-    private String generateToken(String userEmail, TokenType tokenType, String secret, long expireTime) {
-        final Claims claims = Jwts.claims();
-        claims.put(TokenClaimName.USER_EMAIL.value, userEmail);
-        claims.put(TokenClaimName.TOKEN_TYPE.value, tokenType);
+    public String generateAccessToken(String email, Role role) {
+
+        return generateToken(email, TokenObject.ACCESS_TYPE.value, jwtProperties.getAccessSecret(), tokenTimeProperties.getAccessTime(), role);
+    }
+
+    public String generateRefreshToken(String email, Role role) {
+
+        return generateToken(email, TokenObject.REFRESH_TYPE.value, jwtProperties.getRefreshSecret(), tokenTimeProperties.getRefreshTime()  , role);
+    }
+
+    public Authentication authentication(String token) {
+
+        UserDetails userDetails = authDetailsService.loadUserByUsername(getTokenSubject(token, jwtProperties.getAccessSecret()));
+
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
+
+    public String resolveToken(HttpServletRequest request) {
+
+        String token = request.getHeader("Authorization");
+
+        if(token == null) {
+            return null;
+        }
+
+        return parseToken(token);
+    }
+
+    public String exactEmailFromRefreshToken(String refresh) {
+        return getTokenSubject(refresh, jwtProperties.getRefreshSecret());
+    }
+
+    public Role exactRoleFromRefreshToken(String refresh) {
+
+        String authority = getTokenBody(refresh, jwtProperties.getRefreshSecret()).get(TokenObject.AUTHORITY.value, String.class);
+
+        switch (authority) {
+
+            case "ROLE_STUDENT":
+                return Role.ROLE_STUDENT;
+
+            case "ROLE_ADMIN":
+                return Role.ROLE_ADMIN;
+
+            default:
+                throw new RoleNotExistException();
+        }
+    }
+
+    public String generateToken(String email, String type, Key secret, Long exp, Role role) {
+
+        final Claims claims = Jwts.claims().setSubject(email);
+
+        claims.put("type", type);
+
+        claims.put(TokenObject.AUTHORITY.value, role);
+
         return Jwts.builder()
+                .setHeaderParam("typ", "JWT")
+                .signWith(secret, SignatureAlgorithm.HS256)
                 .setClaims(claims)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+expireTime))
-                .signWith(getSignInKey(secret), SignatureAlgorithm.HS256)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + exp * 1000))
                 .compact();
     }
 
-    public Claims extractAllClaims(String token, String secret) {
-        token = token.replace("Bearer", "");
+    public String parseToken(String token) {
+
+        if(token.startsWith(TokenObject.TOKEN_PREFIX.value)) {
+
+            return token.replace(TokenObject.TOKEN_PREFIX.value, "");
+
+        } else {
+
+            return null;
+        }
+    }
+
+    private Claims getTokenBody(String token, Key secret) {
+
         try {
+
             return Jwts.parserBuilder()
-                    .setSigningKey(getSignInKey(secret))
+                    .setSigningKey(secret)
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
+
         } catch (ExpiredJwtException e) {
+
             throw new TokenExpirationException();
+
         } catch (JwtException e) {
+
             throw new TokenNotValidException();
         }
     }
 
-    public ZonedDateTime getExpiredAtToken(String token, String secret) {
-        return ZonedDateTime.now().plusSeconds(ACCESS_TOKEN_EXPIRE_TIME);
-    }
+    private String getTokenSubject(String token, Key secret) {
 
-    public String getUserEmail(String token, String secret) {
-        return extractAllClaims(token, secret).get(TokenClaimName.USER_EMAIL.value, String.class);
+        return getTokenBody(token, secret).getSubject();
     }
-
-    public String getTokenType(String token, String secret) {
-        return extractAllClaims(token, secret).get(TokenClaimName.TOKEN_TYPE.value, String.class);
-    }
-
-    public String generatedAccessToken(String email) {
-        return generateToken(email, TokenType.ACCESS_TOKEN, jwtProperties.getAccessSecret(), ACCESS_TOKEN_EXPIRE_TIME);
-    }
-
-    public String generatedRefreshToken(String email) {
-        return generateToken(email, TokenType.REFRESH_TOKEN, jwtProperties.getRefreshSecret(), REFRESH_TOKEN_EXPIRE_TIME);
-    }
-
-    public UsernamePasswordAuthenticationToken authenticationToken(String email) {
-        UserDetails userDetails = memberDetailsService.loadUserByUsername(email);
-        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-    }
-
 }

@@ -1,15 +1,29 @@
 package mpersand.Gmuwiki.global.security.jwt.properties;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
-@Getter
-@AllArgsConstructor
-@ConstructorBinding
+import java.security.Key;
+
 @ConfigurationProperties(prefix = "jwt")
+@ConstructorBinding
 public class JwtProperties {
-    private final String accessSecret;
-    private final String refreshSecret;
+
+    private final Key accessSecret;
+    private final Key refreshSecret;
+
+    public JwtProperties(String accessSecret, String refreshSecret) {
+        this.accessSecret = Keys.hmacShaKeyFor(accessSecret.getBytes());
+        this.refreshSecret = Keys.hmacShaKeyFor(refreshSecret.getBytes());
+    }
+
+    public Key getAccessSecret() {
+        return accessSecret;
+    }
+
+    public Key getRefreshSecret() {
+        return refreshSecret;
+    }
 }
+

@@ -30,6 +30,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    generate-ddl: true
 
   main:
     allow-bean-definition-overriding: 'true'
@@ -41,6 +42,9 @@ spring:
 jwt:
   accessSecret: ${ACCESS_SECRET}
   refreshSecret: ${REFRESH_SECRET}
+  time:
+    accessTime: ${JWT_ACCESS_TIME}
+    refreshTime: ${JWT_REFRESH_TIME}
 
 cloud:
   aws:
@@ -61,3 +65,8 @@ logging:
       amazonaws:
         util:
           EC2MetadataUtils: error
+
+gauth:
+  clientId: ${CLIENT_ID}
+  clientSecret: ${CLIENT_SECRET}
+  redirectUri: ${REDIRECT_URI}

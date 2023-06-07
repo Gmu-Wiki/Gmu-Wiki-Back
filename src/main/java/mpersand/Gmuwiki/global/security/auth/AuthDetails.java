@@ -10,7 +10,7 @@ import java.util.Collections;
 
 
 @RequiredArgsConstructor
-public class MemberDetails implements UserDetails {
+public class AuthDetails implements UserDetails {
 
     private final User user;
 
@@ -19,7 +19,7 @@ public class MemberDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return null;
     }
 
     @Override

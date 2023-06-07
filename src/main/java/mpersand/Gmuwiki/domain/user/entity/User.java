@@ -2,8 +2,10 @@ package mpersand.Gmuwiki.domain.user.entity;
 
 import lombok.*;
 import mpersand.Gmuwiki.domain.user.enums.Role;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -13,27 +15,27 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID id;
 
     @Column(name = "email" , nullable = false)
     private String email;
 
-    @Column(name = "password" , nullable = false)
-    private String password;
-
     @Column(name = "student_name" , nullable = false)
     private String name;
 
-    @Column(name = "student_num" , nullable = false , unique = true , length = 4)
-    private String number;
+    @Column(name = "grade" , nullable = false)
+    private int grade;
+
+    @Column(name = "class_num" , nullable = false)
+    private int classNum;
+
+    @Column(name = "student_num" , nullable = false)
+    private int stuNum;
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    public void updatePassword(String password) {
-        this.password = password;
-    }
 }
