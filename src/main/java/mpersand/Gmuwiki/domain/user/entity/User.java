@@ -38,4 +38,8 @@ public class User {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }
