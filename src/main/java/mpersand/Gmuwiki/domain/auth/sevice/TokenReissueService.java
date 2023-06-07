@@ -2,44 +2,69 @@ package mpersand.Gmuwiki.domain.auth.sevice;
 
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.auth.entity.RefreshToken;
-import mpersand.Gmuwiki.domain.auth.exception.RefreshTokenNotFoundException;
-import mpersand.Gmuwiki.domain.auth.presentation.dto.response.NewTokenResponse;
+import mpersand.Gmuwiki.domain.auth.presentation.data.response.NewTokenResponse;
 import mpersand.Gmuwiki.domain.auth.repository.RefreshTokenRepository;
+import mpersand.Gmuwiki.domain.auth.util.AuthConverter;
+import mpersand.Gmuwiki.domain.user.entity.User;
+import mpersand.Gmuwiki.domain.user.enums.Role;
 import mpersand.Gmuwiki.global.annotation.RollbackService;
+import mpersand.Gmuwiki.global.security.exception.RefreshTokenExpirationException;
 import mpersand.Gmuwiki.global.security.exception.TokenNotValidException;
 import mpersand.Gmuwiki.global.security.jwt.TokenProvider;
-import mpersand.Gmuwiki.global.security.jwt.properties.JwtProperties;
+import mpersand.Gmuwiki.global.util.UserUtil;
 
 import java.time.ZonedDateTime;
 
-@RequiredArgsConstructor
 @RollbackService
+@RequiredArgsConstructor
 public class TokenReissueService {
 
-    private final RefreshTokenRepository refreshTokenRepository;
     private final TokenProvider tokenProvider;
-    private final JwtProperties jwtProperties;
 
-    public NewTokenResponse execute(String requestToken) {
-        String email = tokenProvider.getUserEmail(requestToken, jwtProperties.getRefreshSecret());
-        RefreshToken token = refreshTokenRepository.findById(email)
-                .orElseThrow(() -> new RefreshTokenNotFoundException());
+    private final RefreshTokenRepository refreshTokenRepository;
 
-        if(!token.getRefreshToken().equals(requestToken)) {
+    private final AuthConverter authConverter;
+
+    private final UserUtil userUtil;
+
+    public NewTokenResponse execute(String refreshToken) {
+
+        String refresh = tokenProvider.parseToken(refreshToken);
+
+        if(refresh == null) {
             throw new TokenNotValidException();
         }
 
-        String accessToken = tokenProvider.generatedAccessToken(email);
-        String refreshToken = tokenProvider.generatedRefreshToken(email);
-        ZonedDateTime expiredAt = tokenProvider.getExpiredAtToken(accessToken, jwtProperties.getAccessSecret());
+        String email = tokenProvider.exactEmailFromRefreshToken(refresh);
 
-        token.exchangeRefreshToken(refreshToken);
-        refreshTokenRepository.save(token);
+        Role role = tokenProvider.exactRoleFromRefreshToken(refresh);
+
+        RefreshToken existingRefreshToken = refreshTokenRepository.findByToken(refresh);
+
+        if(existingRefreshToken == null) {
+
+            throw new RefreshTokenExpirationException();
+        }
+
+        String newAccessToken = tokenProvider.generateAccessToken(email, role);
+
+        String newRefreshToken = tokenProvider.generateRefreshToken(email, role);
+
+        ZonedDateTime accessExp = tokenProvider.accessExpiredTime();
+
+        ZonedDateTime refreshExp = tokenProvider.refreshExpiredTime();
+
+        RefreshToken newRefreshTokenEntity = authConverter.toEntity(existingRefreshToken.getUserId(), newRefreshToken);
+
+        refreshTokenRepository.save(newRefreshTokenEntity);
+
+        User user = userUtil.currentUser();
 
         return NewTokenResponse.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .expiredAt(expiredAt)
+                .accessToken(newAccessToken)
+                .refreshToken(newRefreshToken)
+                .accessExp(accessExp)
+                .refreshExp(refreshExp)
                 .build();
     }
 }
