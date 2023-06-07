@@ -37,9 +37,9 @@ public class SecurityConfig {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/email/**").permitAll()
-                .antMatchers("/file/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/user/**").hasAuthority("USER")
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/file/**").hasAnyAuthority("ROLE_STUDENT", "ROLE_ADMIN")
+                .antMatchers("/user/**").hasAuthority("ROLE_STUDENT")
+                .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .anyRequest().denyAll();
 
         http
