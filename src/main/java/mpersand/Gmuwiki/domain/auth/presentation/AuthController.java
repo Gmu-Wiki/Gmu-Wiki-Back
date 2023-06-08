@@ -9,6 +9,7 @@ import mpersand.Gmuwiki.domain.auth.sevice.TokenReissueService;
 import mpersand.Gmuwiki.domain.auth.sevice.UserLoginService;
 import mpersand.Gmuwiki.domain.auth.sevice.UserLogoutService;
 import mpersand.Gmuwiki.domain.auth.util.AuthConverter;
+import mpersand.Gmuwiki.global.annotation.RestRequestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.IOException;
 
-@RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RestRequestService("/auth")
 public class AuthController {
 
     private final UserLoginService userLoginService;
