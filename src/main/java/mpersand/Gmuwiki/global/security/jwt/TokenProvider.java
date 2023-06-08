@@ -37,7 +37,7 @@ public class TokenProvider {
     private enum TokenObject {
         ACCESS_TYPE("access"),
         REFRESH_TYPE("refresh"),
-        TOKEN_PREFIX("Bearer"),
+        TOKEN_PREFIX("Bearer "),
         AUTHORITY("authority");
         String value;
     }
@@ -59,7 +59,7 @@ public class TokenProvider {
 
     public String generateRefreshToken(String email, Role role) {
 
-        return generateToken(email, TokenObject.REFRESH_TYPE.value, jwtProperties.getRefreshSecret(), tokenTimeProperties.getRefreshTime()  , role);
+        return generateToken(email, TokenObject.REFRESH_TYPE.value, jwtProperties.getRefreshSecret(), tokenTimeProperties.getRefreshTime(), role);
     }
 
     public Authentication authentication(String token) {
