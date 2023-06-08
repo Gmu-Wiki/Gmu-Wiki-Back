@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Getter
 @Builder
-@RedisHash(value = "refreshToken")
+@RedisHash(value = "refreshToken", timeToLive = 60L * 60 * 24 * 7)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class RefreshToken {
@@ -20,5 +20,4 @@ public class RefreshToken {
 
     @Indexed
     private UUID userId;
-
 }
