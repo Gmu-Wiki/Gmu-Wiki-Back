@@ -5,13 +5,13 @@ import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeDetailResp
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeListResponse;
 import mpersand.Gmuwiki.domain.notice.service.ListNoticeService;
 import mpersand.Gmuwiki.domain.notice.service.OneNoticeService;
+import mpersand.Gmuwiki.global.annotation.RestRequestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/user/notice")
 @RequiredArgsConstructor
+@RestRequestService("/user/notice")
 public class UserNoticeController {
 
     private final ListNoticeService listNoticeService;
