@@ -8,15 +8,15 @@ import mpersand.Gmuwiki.domain.board.presentation.dto.response.DetailBoardRespon
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListBoardRecordResponse;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListBoardResponse;
 import mpersand.Gmuwiki.domain.board.service.*;
+import mpersand.Gmuwiki.global.annotation.RestRequestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/board")
+@RestRequestService("/admin/board")
 public class AdminBoardController {
 
     private final CreateBoardService createBoardService;
