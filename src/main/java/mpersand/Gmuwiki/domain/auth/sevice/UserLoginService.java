@@ -66,13 +66,13 @@ public class UserLoginService {
 
     private Role getRoleByGAuthInfo(String role, String email) {
 
-        String SecretEmail = System.getenv("SECRET_EMAIL");
+        String secretEmail = System.getenv("SECRET_EMAIL");
 
-        User user = userRepository.findUserByEmail(email);
-
-        if (email.equals(SecretEmail)) {
+        if (email.equals(secretEmail)) {
             return Role.ROLE_ADMIN;
         }
+
+        User user = userRepository.findUserByEmail(email);
 
         if(user == null) {
             switch (role) {
