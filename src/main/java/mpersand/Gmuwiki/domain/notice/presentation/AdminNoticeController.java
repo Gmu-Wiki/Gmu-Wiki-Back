@@ -6,15 +6,15 @@ import mpersand.Gmuwiki.domain.notice.presentation.dto.request.EditNoticeRequest
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeDetailResponse;
 import mpersand.Gmuwiki.domain.notice.presentation.dto.response.NoticeListResponse;
 import mpersand.Gmuwiki.domain.notice.service.*;
+import mpersand.Gmuwiki.global.annotation.RestRequestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@RestController
-@RequestMapping("/admin/notice")
 @RequiredArgsConstructor
+@RestRequestService("/admin/notice")
 public class AdminNoticeController {
 
     private final ListNoticeService listNoticeService;
