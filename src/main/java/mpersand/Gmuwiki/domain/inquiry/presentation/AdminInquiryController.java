@@ -6,15 +6,15 @@ import mpersand.Gmuwiki.domain.inquiry.presentation.dto.request.InquiryWriteRequ
 import mpersand.Gmuwiki.domain.inquiry.presentation.dto.response.DetailInquiryResponse;
 import mpersand.Gmuwiki.domain.inquiry.presentation.dto.response.ListInquiryResponse;
 import mpersand.Gmuwiki.domain.inquiry.service.*;
+import mpersand.Gmuwiki.global.annotation.RestRequestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/inquiry")
+@RestRequestService("/admin/inquiry")
 public class AdminInquiryController {
 
     private final CreateInquiryService createInquiryService;
