@@ -21,6 +21,6 @@ public class GrantAdminService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException());
 
-        user.setRole(Role.ROLE_ADMIN);
+        user.updateRole(Role.ROLE_ADMIN);
     }
 }

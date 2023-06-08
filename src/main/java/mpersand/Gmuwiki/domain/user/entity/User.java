@@ -39,7 +39,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public void setRole(Role role) {
+    public void updateRole(Role role) {
         this.role = role;
     }
 }
