@@ -6,8 +6,10 @@ import mpersand.Gmuwiki.domain.board.entity.BoardRecord;
 import mpersand.Gmuwiki.domain.board.exception.ExistTitleException;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.EditBoardRequest;
 import mpersand.Gmuwiki.domain.board.repository.BoardRecordRepository;
+import mpersand.Gmuwiki.domain.user.entity.User;
 import mpersand.Gmuwiki.global.annotation.RollbackService;
 import mpersand.Gmuwiki.global.util.BoardUtil;
+import mpersand.Gmuwiki.global.util.UserUtil;
 
 @RequiredArgsConstructor
 @RollbackService
@@ -17,9 +19,13 @@ public class EditBoardService {
 
     private final BoardUtil boardUtil;
 
+    private final UserUtil userUtil;
+
     public void execute(Long id, EditBoardRequest editBoardRequest) {
 
         Board board = boardUtil.findBoardById(id);
+
+        User user = userUtil.currentUser();
 
         if(boardRecordRepository.existsByTitle(editBoardRequest.getTitle())) {
             throw new ExistTitleException();
@@ -37,6 +43,6 @@ public class EditBoardService {
 
         boardRecordRepository.save(boardRecord);
 
-        board.update(editBoardRequest);
+        board.update(editBoardRequest, user.getName());
     }
 }
