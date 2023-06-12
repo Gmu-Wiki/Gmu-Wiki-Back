@@ -1,6 +1,7 @@
 package mpersand.Gmuwiki.domain.board.entity;
 
 import lombok.*;
+import mpersand.Gmuwiki.domain.board.enums.BoardDetailType;
 import mpersand.Gmuwiki.domain.board.enums.BoardType;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.EditBoardRequest;
 import mpersand.Gmuwiki.domain.user.entity.User;
@@ -39,6 +40,9 @@ public class Board {
 
     @Enumerated(EnumType.STRING)
     private BoardType boardType;
+
+    @Enumerated(EnumType.STRING)
+    private BoardDetailType boardDetailType;
 
     @CreatedDate
     private LocalDateTime createdDate;
