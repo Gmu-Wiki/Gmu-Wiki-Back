@@ -2,6 +2,7 @@ package mpersand.Gmuwiki.domain.board.service;
 
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.board.entity.Board;
+import mpersand.Gmuwiki.domain.board.enums.BoardDetailType;
 import mpersand.Gmuwiki.domain.board.enums.BoardType;
 import mpersand.Gmuwiki.domain.board.exception.ExistTitleException;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.CreateBoardRequest;
@@ -33,6 +34,7 @@ public class CreateBoardService {
                 .content(createBoardRequest.getContent())
                 .name(user.getName())
                 .boardType(BoardType.from(createBoardRequest.getBoardType()))
+                .boardDetailType(BoardDetailType.from(createBoardRequest.getBoardDetailType()))
                 .user(user)
                 .createdDate(LocalDateTime.now())
                 .editedDate(LocalDateTime.now())
