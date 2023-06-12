@@ -14,7 +14,10 @@ public class CreateBoardRequest {
 
     private String content;
 
-    @NotBlank(message = "글 종류는 필수 선택값입니다.")
+    @NotBlank(message = "글 카테고리는 필수 선택값입니다.")
     private String boardType;
+
+    @NotBlank(message = "글 세부 카테고리는 필수 선택값입니다.")
+    private String boardDetailType;
 }
 
