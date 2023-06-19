@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -32,11 +31,7 @@ public class FileUploadService {
 
     private static final List<String> ALLOWED_MIME_TYPES = Arrays.asList("file/jpg", "file/png", "file/gif", "file/mp4");
 
-    public List<FileUploadResponse> execute(List<MultipartFile> multipartFile) {
-
-        List<FileUploadResponse> fileNameList = new ArrayList<>();
-
-        multipartFile.forEach(file -> {
+    public FileUploadResponse execute(MultipartFile file) {
 
             String fileName = createFileName(file.getOriginalFilename());
 
@@ -63,15 +58,9 @@ public class FileUploadService {
 
             String fileUrl = generateFileUrl(fileName);
 
-            FileUploadResponse fileUploadResponse = FileUploadResponse.builder()
+            return FileUploadResponse.builder()
                     .awsUrl(fileUrl)
                     .build();
-
-            fileNameList.add(fileUploadResponse);
-
-        });
-
-        return fileNameList;
     }
 
     public void deleteFile(String fileName) {
