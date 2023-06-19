@@ -7,12 +7,8 @@ import mpersand.Gmuwiki.global.annotation.RestRequestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestRequestService("/file")
@@ -21,8 +17,8 @@ public class FileController {
     private final FileUploadService fileUploadService;
 
     @PostMapping
-    public ResponseEntity<List<FileUploadResponse>> upload(@RequestPart(name = "file", required = false) List<MultipartFile> files) {
-        List<FileUploadResponse> fileUploadResponse = fileUploadService.execute(files);
+    public ResponseEntity<FileUploadResponse> upload(@RequestPart(name = "file", required = false) MultipartFile files) {
+        FileUploadResponse fileUploadResponse = fileUploadService.execute(files);
         return new ResponseEntity<>(fileUploadResponse, HttpStatus.CREATED);
     }
 }
