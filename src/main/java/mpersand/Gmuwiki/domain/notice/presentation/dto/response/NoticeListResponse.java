@@ -8,6 +8,6 @@ import java.util.List;
 @AllArgsConstructor
 public class NoticeListResponse {
 
-    private List<NoticeResponse> list;
+    private List<NoticeResponse> noticeList;
 
 }

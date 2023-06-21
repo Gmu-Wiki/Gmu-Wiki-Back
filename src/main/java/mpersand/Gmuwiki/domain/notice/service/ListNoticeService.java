@@ -22,7 +22,7 @@ public class ListNoticeService {
         List<Notice> notices = noticeRepository.findAll();
 
         NoticeListResponse noticeListResponse = NoticeListResponse.builder()
-                .list(
+                .noticeList(
                         notices.stream()
                                 .map(notice -> toResponse(notice))
                                 .collect(Collectors.toList())
