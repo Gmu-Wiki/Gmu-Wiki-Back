@@ -44,7 +44,7 @@ public class AdminNoticeController {
     @PatchMapping("/{id}")
     public ResponseEntity<Void> edit(@PathVariable Long id, @RequestBody @Valid EditNoticeRequest editNoticeRequest){
         editNoticeService.execute(id, editNoticeRequest);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
