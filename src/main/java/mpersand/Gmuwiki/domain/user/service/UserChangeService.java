@@ -4,23 +4,23 @@ import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import mpersand.Gmuwiki.domain.user.enums.Role;
 import mpersand.Gmuwiki.domain.user.exception.UserNotFoundException;
-import mpersand.Gmuwiki.domain.user.presentation.dto.request.GrantAdminRequest;
+import mpersand.Gmuwiki.domain.user.presentation.dto.request.RoleChangeRequest;
 import mpersand.Gmuwiki.domain.user.repository.UserRepository;
 import mpersand.Gmuwiki.global.annotation.RollbackService;
 
 @RollbackService
 @RequiredArgsConstructor
-public class GrantAdminService {
+public class UserChangeService {
 
     private final UserRepository userRepository;
 
-    public void execute(GrantAdminRequest grantAdminRequest) {
+    public void execute(RoleChangeRequest roleChangeRequest) {
 
-        String email = grantAdminRequest.getEmail();
+        String email = roleChangeRequest.getEmail();
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException());
 
-        user.updateRole(Role.ROLE_ADMIN);
+        user.updateRole(Role.ROLE_STUDENT);
     }
 }
