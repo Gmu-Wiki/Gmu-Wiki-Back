@@ -4,10 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import mpersand.Gmuwiki.global.error.ErrorCode;
 import mpersand.Gmuwiki.global.error.ErrorMessage;
 import mpersand.Gmuwiki.global.error.GimuwikiException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import javax.servlet.FilterChain;
@@ -20,11 +21,12 @@ import static mpersand.Gmuwiki.global.error.ErrorCode.*;
 
 
 @Component
-@Slf4j
 @RequiredArgsConstructor
 public class ExceptionFilter extends OncePerRequestFilter {
 
     private final ObjectMapper objectMapper;
+
+    private final Logger log = LoggerFactory.getLogger(getClass().getSimpleName());
 
     public void setErrorResponse(ErrorCode errorCode, HttpServletResponse response) throws IOException {
         response.setStatus(errorCode.getStatus());
