@@ -37,7 +37,7 @@ dependencies {
 
 	//db
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	runtimeOnly 'com.mysql:mysql-connector-j'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:3.1.2'
 
 	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -56,6 +56,9 @@ dependencies {
 
 	//gauth
 	implementation 'com.github.GSM-MSG:GAuth-SDK-Java:v2.0.0'
+
+	//webhook
+	implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 }
 
 tasks.named('test') {

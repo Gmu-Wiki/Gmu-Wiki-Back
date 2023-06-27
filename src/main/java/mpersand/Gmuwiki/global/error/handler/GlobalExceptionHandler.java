@@ -1,8 +1,9 @@
 package mpersand.Gmuwiki.global.error.handler;
 
-import lombok.extern.slf4j.Slf4j;
 import mpersand.Gmuwiki.global.error.ErrorMessage;
 import mpersand.Gmuwiki.global.error.GimuwikiException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,9 +12,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass().getSimpleName());
 
     @ExceptionHandler(GimuwikiException.class)
     public ResponseEntity<ErrorMessage> handleComprehensiveException(HttpServletRequest request, GimuwikiException e) {

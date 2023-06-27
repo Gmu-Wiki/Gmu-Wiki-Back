@@ -1,11 +1,8 @@
-package mpersand.Gmuwiki.global.filter;
+package mpersand.Gmuwiki.global.logger.filter;
 
 import lombok.RequiredArgsConstructor;
-import mpersand.Gmuwiki.global.security.jwt.TokenProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -17,26 +14,22 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class JwtRequestFilter extends OncePerRequestFilter {
-
-    private final TokenProvider tokenProvider;
+public class LogRequestFilter extends OncePerRequestFilter {
 
     private final Logger log = LoggerFactory.getLogger(getClass().getSimpleName());
 
-    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        String token = tokenProvider.resolveToken(request);
+        log.info("client ip = {}", request.getRemoteAddr());
 
-        if(token != null && !token.isBlank()) {
+        log.info("request method = {}", request.getMethod());
 
-            Authentication authentication = tokenProvider.authentication(token);
+        log.info("request url = {}", request.getRequestURI());
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            log.info("current user email = " + authentication.getName());
-        }
+        log.info("client info = {}", request.getHeader("User-Agent"));
 
         filterChain.doFilter(request, response);
+
+        log.info("response status = {}", response.getStatus());
     }
 }
