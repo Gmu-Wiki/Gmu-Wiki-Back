@@ -3,6 +3,7 @@ package mpersand.Gmuwiki.global.security.config;
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.global.filter.ExceptionFilter;
 import mpersand.Gmuwiki.global.filter.JwtRequestFilter;
+import mpersand.Gmuwiki.global.logger.filter.LogRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +23,10 @@ import org.springframework.web.cors.CorsUtils;
 public class SecurityConfig {
 
     private final JwtRequestFilter jwtRequestFilter;
+
     private final ExceptionFilter exceptionFilter;
+
+    private final LogRequestFilter logRequestFilter;
 
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -44,7 +48,8 @@ public class SecurityConfig {
 
         http
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(exceptionFilter, JwtRequestFilter.class);
+                .addFilterBefore(exceptionFilter, JwtRequestFilter.class)
+                .addFilterBefore(logRequestFilter, ExceptionFilter.class);
 
         return http.build();
     }
