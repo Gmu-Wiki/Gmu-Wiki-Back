@@ -21,7 +21,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final TokenProvider tokenProvider;
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass().getSimpleName());
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
