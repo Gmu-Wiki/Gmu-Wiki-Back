@@ -6,7 +6,7 @@ import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.global.error.ErrorCode;
 import mpersand.Gmuwiki.global.error.ErrorMessage;
-import mpersand.Gmuwiki.global.error.GimuwikiException;
+import mpersand.Gmuwiki.global.error.GmuwikiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -45,7 +45,7 @@ public class ExceptionFilter extends OncePerRequestFilter {
         } catch (ExpiredJwtException ex) {
             log.debug("================= [ ExceptionHandlerFilter ] 에서 ExpiredJwtException 발생 ===================");
             setErrorResponse(TOKEN_IS_EXPIRED, response);
-        } catch (JwtException | GimuwikiException ex) {
+        } catch (JwtException | GmuwikiException ex) {
             log.debug("================= [ ExceptionHandlerFilter ] 에서 TokenNotValidException 발생 ===================");
             setErrorResponse(TOKEN_NOT_VALID, response);
         } catch (Exception ex) {

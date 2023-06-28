@@ -3,11 +3,11 @@ package mpersand.Gmuwiki.global.error;
 import lombok.Getter;
 
 @Getter
-public class GimuwikiException extends RuntimeException {
+public class GmuwikiException extends RuntimeException {
 
     private ErrorCode errorCode;
 
-    public GimuwikiException(ErrorCode errorCode) {
+    public GmuwikiException(ErrorCode errorCode) {
         super(errorCode.getMessage());
         this.errorCode = errorCode;
     }
