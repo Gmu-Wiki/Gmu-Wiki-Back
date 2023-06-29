@@ -48,9 +48,10 @@ public class ExceptionFilter extends OncePerRequestFilter {
         } catch (JwtException | GmuwikiException ex) {
             log.debug("================= [ ExceptionHandlerFilter ] 에서 TokenNotValidException 발생 ===================");
             setErrorResponse(TOKEN_NOT_VALID, response);
-        } catch (Exception ex) {
-            log.debug("================= [ ExceptionHandlerFilter ] 에서 Exception 발생 ===================");
-            setErrorResponse(UNKNOWN_ERROR, response);
+        }
+//        catch (Exception ex) {
+//            log.debug("================= [ ExceptionHandlerFilter ] 에서 Exception 발생 ===================");
+//            setErrorResponse(UNKNOWN_ERROR, response);
         }
     }
-}
+
