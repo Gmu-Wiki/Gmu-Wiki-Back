@@ -1,0 +1,76 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
+      enabled: true
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: ${DB_USER}
+    url: ${DB_URL}
+    password: ${DB_PASSWORD}
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USER}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth:
+          starttls:
+            enable: true
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+
+  main:
+    allow-bean-definition-overriding: 'true'
+
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+
+jwt:
+  accessSecret: ${ACCESS_SECRET}
+  refreshSecret: ${REFRESH_SECRET}
+  time:
+    accessTime: ${JWT_ACCESS_TIME}
+    refreshTime: ${JWT_REFRESH_TIME}
+
+cloud:
+  aws:
+    region:
+      static: ${AWS_REGION}
+    credentials:
+      access-key: ${AWS_ACCESS}
+      secret-key: ${AWS_SECRET}
+    s3:
+      bucket: ${AWS_BUCKET_NAME}
+      url: ${AWS_URL}
+    stack:
+      auto: false
+
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
+
+gauth:
+  clientId: ${CLIENT_ID}
+  clientSecret: ${CLIENT_SECRET}
+  redirectUri: ${REDIRECT_URI}
+
+discord:
+  webhook:
+    url: ${WEBHOOK_URL}

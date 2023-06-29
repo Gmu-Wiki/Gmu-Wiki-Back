@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <property name="home" value="logs"/>
+
+    <appender name="DEFAULT_REQUEST_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>src/main/resources/logs/access-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>1GB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf8</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>src/main/resources/logs/error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>1GB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf8</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="ExceptionFilter" level="error" additivity="true">
+        <appender-ref ref="ERROR_APPENDER"/>
+    </logger>
+    <logger name="GlobalExceptionHandler" level="error" additivity="true">
+        <appender-ref ref="ERROR_APPENDER"/>
+    </logger>
+    <logger name="LogRequestFilter" level="info" additivity="true">
+        <appender-ref ref="DEFAULT_REQUEST_APPENDER"/>
+    </logger>
+    <logger name="JwtRequestFilter" level="info" additivity="true">
+        <appender-ref ref="DEFAULT_REQUEST_APPENDER"/>
+    </logger>
+</configuration>
