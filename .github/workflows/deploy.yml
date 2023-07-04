@@ -1,0 +1,80 @@
+name: Deploy to cloudtype
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Connect deploy key
+        uses: cloudtype-github-actions/connect@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          ghtoken: ${{ secrets.GHP_TOKEN }}
+      - name: Deploy
+        uses: cloudtype-github-actions/deploy@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          project: gimuwiki/gmu-wiki-back
+          stage: main
+          yaml: >
+            name: gmu-wiki-back
+
+            app: java@11
+
+            options:
+              ports: 8080
+              env:
+                - name: ACCESS_SECRET
+                  value: TXVzaWM=TXVzaWM=TXVzaWM=TXVzaWM=
+                - name: AWS_ACCESS
+                  value: AKIAYJIKAWKLTLLPOVGX
+                - name: AWS_BUCKET_NAME
+                  value: gimuwiki/file
+                - name: AWS_REGION
+                  value: ap-northeast-2
+                - name: AWS_SECRET
+                  value: tRxeJMo+HdpHUDVRggyeJpWCQCEjy6UsJhp/IQ75
+                - name: AWS_URL
+                  value: https://gimuwiki.s3.ap-northeast-2.amazonaws.com/file/
+                - name: CLIENT_ID
+                  value: be5a65c99b30420cb7aa64b81a9367e9b3ac49cf4811407f87f25dd8796b6cef
+                - name: CLIENT_SECRET
+                  value: dbbac7d1e0c048779f0c2ea3b41ab67e6bd44fd1798543c5aab4dcf650e60eae
+                - name: DB_PASSWORD
+                  value: mokdol0809!
+                - name: DB_URL
+                  value: jdbc:mariadb://mariadb/gmuwiki?serverTimezone=Asia/Seoul
+                - name: DB_USER
+                  value: root
+                - name: JWT_ACCESS_TIME
+                  value: "10800"
+                - name: JWT_REFRESH_TIME
+                  value: "604800"
+                - name: MAIL_HOST
+                  value: smtp.gmail.com
+                - name: MAIL_PASSWORD
+                  value: jnbgojbwbdnmqryt
+                - name: MAIL_PORT
+                  value: "587"
+                - name: MAIL_USER
+                  value: gimuwiki12345@gmail.com
+                - name: REDIRECT_URI
+                  value: http://localhost:3000
+                - name: REDIS_HOST
+                  value: redis
+                - name: REDIS_PORT
+                  value: "6379"
+                - name: REFRESH_SECRET
+                  value: cmVjb21tZW5kcmVjb21tZW5kcmVjb21tZW5kcmVjb21tZW5k
+                - name: SECRET_EMAIL
+                  value: s22034@gsm.hs.kr
+                - name: WEBHOOK_URL
+                  value: https://discord.com/api/webhooks/1122510083503427664/gtxtRt_GRALEUTqO0Y8hXsW8osjYvPya2aB_980GQaBi4dWqJw0tDTeEnZkDt3oe5Pak
+            context:
+              git:
+                url: git@github.com:${{ github.repository }}.git
+                ref: ${{ github.ref }}
