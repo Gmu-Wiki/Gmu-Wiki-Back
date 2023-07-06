@@ -19,7 +19,7 @@ jobs:
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
           project: gimuwiki/gmu-wiki-back
-          stage: master
+          stage: main
           yaml: >
             name: gmu-wiki-back
 
