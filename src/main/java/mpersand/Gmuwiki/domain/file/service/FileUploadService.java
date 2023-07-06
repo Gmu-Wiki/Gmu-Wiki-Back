@@ -29,7 +29,7 @@ public class FileUploadService {
 
     private final AmazonS3 amazonS3;
 
-    private static final List<String> ALLOWED_MIME_TYPES = Arrays.asList("file/jpg", "file/png", "file/gif", "file/mp4");
+    private static final List<String> ALLOWED_MIME_TYPES = Arrays.asList("image/jpeg", "image/png", "image/gif", "image/svg+xml");
 
     public FileUploadResponse execute(MultipartFile file) {
 
