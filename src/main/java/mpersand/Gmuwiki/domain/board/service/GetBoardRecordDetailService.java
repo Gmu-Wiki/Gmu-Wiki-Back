@@ -19,6 +19,7 @@ public class GetBoardRecordDetailService {
                 .orElseThrow(() -> new BoardRecordNotFoundException());
 
         DetailBoardResponse detailBoardResponse = DetailBoardResponse.builder()
+                .id(boardRecord.getId())
                 .title(boardRecord.getTitle())
                 .content(boardRecord.getContent())
                 .createdDate(boardRecord.getCreatedDate())
