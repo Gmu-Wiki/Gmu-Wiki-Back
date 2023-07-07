@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class DetailBoardResponse {
 
+    private Long id;
+
     private String title;
 
     private String content;

@@ -11,6 +11,8 @@ import mpersand.Gmuwiki.domain.inquiry.enums.InquiryType;
 @AllArgsConstructor
 public class DetailInquiryResponse {
 
+    private Long id;
+
     private String title;
 
     private String content;

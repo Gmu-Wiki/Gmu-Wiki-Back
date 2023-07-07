@@ -11,6 +11,8 @@ import mpersand.Gmuwiki.domain.inquiry.enums.InquiryType;
 @AllArgsConstructor
 public class InquiryResponse {
 
+    private Long id;
+
     private String title;
 
     private InquiryType inquiryType;
@@ -18,6 +20,7 @@ public class InquiryResponse {
     public static InquiryResponse toResponse(Inquiry inquiry) {
 
         return InquiryResponse.builder()
+                .id(inquiry.getId())
                 .title(inquiry.getTitle())
                 .inquiryType(inquiry.getInquiryType())
                 .build();
