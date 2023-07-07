@@ -10,7 +10,7 @@ import mpersand.Gmuwiki.global.annotation.RollbackService;
 
 @RollbackService
 @RequiredArgsConstructor
-public class UserChangeService {
+public class UserRoleChangeService {
 
     private final UserRepository userRepository;
 
