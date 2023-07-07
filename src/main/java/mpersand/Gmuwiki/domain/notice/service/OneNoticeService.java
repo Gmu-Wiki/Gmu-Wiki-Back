@@ -17,6 +17,7 @@ public class OneNoticeService {
         Notice notice = noticeUtil.findNoticeById(id);
 
         NoticeDetailResponse noticeDetailResponse = NoticeDetailResponse.builder()
+                .id(notice.getId())
                 .title(notice.getTitle())
                 .content(notice.getContent())
                 .createdDate(notice.getCreatedDate())
