@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NoticeDetailResponse {
 
+    private Long id;
+
     private String title;
 
     private String content;

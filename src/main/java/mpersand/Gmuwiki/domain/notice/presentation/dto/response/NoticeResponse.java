@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 @Builder
 public class NoticeResponse {
 
+    private Long id;
+
     private String title;
 
     private LocalDateTime createdDate;
@@ -17,6 +19,7 @@ public class NoticeResponse {
     public static NoticeResponse toResponse(Notice notice) {
 
         return NoticeResponse.builder()
+                .id(notice.getId())
                 .title(notice.getTitle())
                 .createdDate(notice.getCreatedDate())
                 .build();

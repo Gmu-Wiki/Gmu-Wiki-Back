@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class BoardRecordResponse {
 
+    private Long id;
+
     private LocalDateTime createdDate;
 
     private String name;
@@ -19,6 +21,7 @@ public class BoardRecordResponse {
     public static BoardRecordResponse toResponse(BoardRecord boardRecord) {
 
         return BoardRecordResponse.builder()
+                .id(boardRecord.getId())
                 .createdDate(boardRecord.getCreatedDate())
                 .name(boardRecord.getName())
                 .build();

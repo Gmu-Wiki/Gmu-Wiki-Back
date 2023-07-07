@@ -19,6 +19,7 @@ public class GetInquiryDetailService {
                 .orElseThrow(() -> new InquiryNotFoundException());
 
         DetailInquiryResponse detailInquiryResponse = DetailInquiryResponse.builder()
+                .id(inquiry.getId())
                 .title(inquiry.getTitle())
                 .content(inquiry.getContent())
                 .inquiryType(inquiry.getInquiryType())

@@ -17,6 +17,7 @@ public class GetBoardDetailService {
         Board board = boardUtil.findBoardById(id);
 
         DetailBoardResponse detailBoardResponse = DetailBoardResponse.builder()
+                .id(board.getId())
                 .title(board.getTitle())
                 .content(board.getContent())
                 .createdDate(board.getCreatedDate())

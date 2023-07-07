@@ -11,6 +11,8 @@ import mpersand.Gmuwiki.domain.board.enums.BoardDetailType;
 @AllArgsConstructor
 public class BoardResponse {
 
+    private Long id;
+
     private String title;
 
     private BoardDetailType boardDetailType;
@@ -18,6 +20,7 @@ public class BoardResponse {
     public static BoardResponse toResponse(Board board) {
 
         return BoardResponse.builder()
+                .id(board.getId())
                 .title(board.getTitle())
                 .boardDetailType(board.getBoardDetailType())
                 .build();
