@@ -10,7 +10,7 @@ import mpersand.Gmuwiki.global.annotation.RollbackService;
 
 @RollbackService
 @RequiredArgsConstructor
-public class AdminChangeService {
+public class UserRoleChangeService {
 
     private final UserRepository userRepository;
 
@@ -21,6 +21,6 @@ public class AdminChangeService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException());
 
-        user.updateRole(Role.ROLE_ADMIN);
+        user.updateRole(Role.ROLE_STUDENT);
     }
 }

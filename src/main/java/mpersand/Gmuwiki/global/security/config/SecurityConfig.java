@@ -40,7 +40,6 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/auth/**").permitAll()
-                .antMatchers("/email/**").permitAll()
                 .antMatchers("/file/**").hasAnyAuthority("ROLE_STUDENT", "ROLE_ADMIN")
                 .antMatchers("/user/**").hasAuthority("ROLE_STUDENT")
                 .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
