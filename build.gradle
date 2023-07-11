@@ -1,7 +1,15 @@
+//querydsl
+buildscript {
+	ext {
+		queryDslVersion = "5.0.0"
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.9'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 group = 'mpersand'
@@ -16,6 +24,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	//gauth
 	maven { url 'https://jitpack.io' }
 }
 
@@ -59,8 +68,28 @@ dependencies {
 
 	//webhook
 	implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+
+	//querydsl
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+	annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+//querydsl
+def querydslSrcDir = "$buildDir/generated/querydsl"
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslSrcDir
+}
+sourceSets {
+	main.java.srcDir querydslSrcDir
+}
+configurations {
+	querydsl.extendsFrom compileClasspath
+}
+compileQuerydsl {
+	options.annotationProcessorPath = configurations.querydsl
 }
