@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.board.enums.BoardType;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.CreateBoardRequest;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.EditBoardRequest;
+import mpersand.Gmuwiki.domain.board.presentation.dto.request.SearchBoardTitleRequest;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.DetailBoardResponse;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListBoardRecordResponse;
 import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListBoardResponse;
+import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListSearchBoardResponse;
 import mpersand.Gmuwiki.domain.board.service.*;
 import mpersand.Gmuwiki.global.annotation.RestRequestService;
 import org.springframework.http.HttpStatus;
@@ -33,10 +35,18 @@ public class AdminBoardController {
 
     private final GetBoardRecordDetailService getBoardRecordDetailService;
 
+    private final SearchBoardTitleService searchBoardTitleService;
+
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest) {
         createBoardService.execute(createBoardRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<ListSearchBoardResponse> searchTitle(@RequestParam("title") SearchBoardTitleRequest searchBoardTitleRequest) {
+        var list = searchBoardTitleService.execute(searchBoardTitleRequest);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping
