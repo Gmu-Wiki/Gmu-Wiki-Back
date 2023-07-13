@@ -22,6 +22,7 @@ public class GetInquiryDetailService {
                 .id(inquiry.getId())
                 .title(inquiry.getTitle())
                 .content(inquiry.getContent())
+                .createdDate(inquiry.getCreatedDate())
                 .inquiryType(inquiry.getInquiryType())
                 .name(inquiry.getName())
                 .build();
