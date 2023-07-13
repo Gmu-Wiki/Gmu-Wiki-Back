@@ -6,6 +6,8 @@ import lombok.Getter;
 import mpersand.Gmuwiki.domain.inquiry.entity.Inquiry;
 import mpersand.Gmuwiki.domain.inquiry.enums.InquiryType;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Builder
 @AllArgsConstructor
@@ -15,6 +17,8 @@ public class InquiryResponse {
 
     private String title;
 
+    private LocalDateTime createdDate;
+
     private InquiryType inquiryType;
 
     public static InquiryResponse toResponse(Inquiry inquiry) {
@@ -22,6 +26,7 @@ public class InquiryResponse {
         return InquiryResponse.builder()
                 .id(inquiry.getId())
                 .title(inquiry.getTitle())
+                .createdDate(inquiry.getCreatedDate())
                 .inquiryType(inquiry.getInquiryType())
                 .build();
     }
