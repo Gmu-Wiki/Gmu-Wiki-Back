@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import mpersand.Gmuwiki.domain.inquiry.enums.InquiryType;
 
+import java.time.LocalDateTime;
+
 
 @Getter
 @Builder
@@ -16,6 +18,8 @@ public class DetailInquiryResponse {
     private String title;
 
     private String content;
+
+    private LocalDateTime createdDate;
 
     private InquiryType inquiryType;
 
