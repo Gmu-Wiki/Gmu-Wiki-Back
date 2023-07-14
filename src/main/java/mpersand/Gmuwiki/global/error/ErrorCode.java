@@ -19,6 +19,7 @@ public enum ErrorCode {
     BOARD_NOT_FOUND("게시글을 찾을 수 없습니다.", 404),
     MISMATCH_BOARD_AUTHOR("내가 작성한 글이 아닙니다.", 403),
     ALREADY_EXIST_TITLE("이미 존재하는 제목입니다.", 409),
+    BOARD_NOT_CHANGE("달라진 수정사항이 없습니다.", 403),
 
     //BOARD RECORD
     BOARD_RECORD_NOT_FOUND("게시글의 기록을 찾을 수 없습니다.", 404),
