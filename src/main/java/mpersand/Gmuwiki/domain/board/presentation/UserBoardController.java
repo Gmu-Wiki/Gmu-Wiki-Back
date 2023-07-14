@@ -61,7 +61,7 @@ public class UserBoardController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/detail")
+    @GetMapping("/{id}/record/detail")
     public ResponseEntity<DetailBoardResponse> findRecordDetailOne(@PathVariable Long id) {
         DetailBoardResponse oneFindById = getBoardRecordDetailService.execute(id);
         return new ResponseEntity<>(oneFindById, HttpStatus.OK);
