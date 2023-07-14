@@ -25,7 +25,7 @@ public class Board {
     @Column(name = "board_id")
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String title;
 
     @Column(nullable = false)

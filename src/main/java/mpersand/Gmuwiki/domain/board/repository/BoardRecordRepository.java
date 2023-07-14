@@ -10,7 +10,5 @@ public interface BoardRecordRepository extends JpaRepository<BoardRecord, Long> 
 
     List<BoardRecord> findByBoard(Board board);
 
-    boolean existsByTitle(String title);
-
     void deleteAllByBoard(Board board);
 }
