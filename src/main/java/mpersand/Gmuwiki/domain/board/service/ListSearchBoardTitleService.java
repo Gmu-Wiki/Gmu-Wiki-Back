@@ -16,7 +16,7 @@ import static mpersand.Gmuwiki.domain.board.presentation.dto.response.SearchBoar
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
 @RequiredArgsConstructor
-public class SearchBoardTitleService {
+public class ListSearchBoardTitleService {
 
     private final BoardRepository boardRepository;
 
