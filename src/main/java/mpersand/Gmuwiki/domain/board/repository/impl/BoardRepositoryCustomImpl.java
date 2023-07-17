@@ -25,4 +25,14 @@ public class BoardRepositoryCustomImpl implements BoardRepositoryCustom {
                 .limit(12)
                 .fetch();
         }
+
+    @Override
+    public List<Board> findRecentlyModifiedBoards() {
+
+        return jpaQueryFactory
+                .selectFrom(QBoard.board)
+                .orderBy(QBoard.board.editedDate.desc())
+                .limit(12)
+                .fetch();
+        }
     }
