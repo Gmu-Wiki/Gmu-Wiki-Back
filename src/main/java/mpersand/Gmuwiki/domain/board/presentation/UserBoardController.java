@@ -5,10 +5,7 @@ import mpersand.Gmuwiki.domain.board.enums.BoardType;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.CreateBoardRequest;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.EditBoardRequest;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.SearchBoardTitleRequest;
-import mpersand.Gmuwiki.domain.board.presentation.dto.response.DetailBoardResponse;
-import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListBoardRecordResponse;
-import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListBoardResponse;
-import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListSearchBoardResponse;
+import mpersand.Gmuwiki.domain.board.presentation.dto.response.*;
 import mpersand.Gmuwiki.domain.board.service.*;
 import mpersand.Gmuwiki.global.annotation.RestRequestService;
 import org.springframework.http.HttpStatus;
@@ -35,7 +32,9 @@ public class UserBoardController {
 
     private final GetBoardRecordDetailService getBoardRecordDetailService;
 
-    private final SearchBoardTitleService searchBoardTitleService;
+    private final ListSearchBoardTitleService listSearchBoardTitleService;
+
+    private final ListRecentEditBoardService listRecentEditBoardService;
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest) {
@@ -45,7 +44,13 @@ public class UserBoardController {
 
     @GetMapping("/search")
     public ResponseEntity<ListSearchBoardResponse> searchTitle(@RequestParam("title") SearchBoardTitleRequest searchBoardTitleRequest) {
-        var list = searchBoardTitleService.execute(searchBoardTitleRequest);
+        var list = listSearchBoardTitleService.execute(searchBoardTitleRequest);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/recent")
+    public ResponseEntity<ListResentBoardResponse> recentEditBoardTitle() {
+        var list = listRecentEditBoardService.execute();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 

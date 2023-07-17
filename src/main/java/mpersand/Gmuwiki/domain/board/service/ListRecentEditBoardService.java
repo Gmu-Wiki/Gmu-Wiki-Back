@@ -2,8 +2,7 @@ package mpersand.Gmuwiki.domain.board.service;
 
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.board.entity.Board;
-import mpersand.Gmuwiki.domain.board.presentation.dto.request.SearchBoardTitleRequest;
-import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListSearchBoardResponse;
+import mpersand.Gmuwiki.domain.board.presentation.dto.response.ListResentBoardResponse;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,20 +10,20 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static mpersand.Gmuwiki.domain.board.presentation.dto.response.SearchBoardResponse.toResponse;
+import static mpersand.Gmuwiki.domain.board.presentation.dto.response.ResentBoardResponse.toResponse;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
 @RequiredArgsConstructor
-public class SearchBoardTitleService {
+public class ListRecentEditBoardService {
 
     private final BoardRepository boardRepository;
 
-    public ListSearchBoardResponse execute(SearchBoardTitleRequest searchBoardTitleRequest) {
+    public ListResentBoardResponse execute() {
 
-        List<Board> titles = boardRepository.findByTitle(searchBoardTitleRequest.getTitle());
+        List<Board> titles = boardRepository.findRecentlyModifiedBoards();
 
-        ListSearchBoardResponse listSearchBoardResponse = ListSearchBoardResponse.builder()
+        ListResentBoardResponse listResentBoardResponse = ListResentBoardResponse.builder()
                 .boardTitleList(
                         titles.stream()
                                 .map(board -> toResponse(board))
@@ -32,6 +31,6 @@ public class SearchBoardTitleService {
                 )
                 .build();
 
-        return listSearchBoardResponse;
+        return listResentBoardResponse;
     }
 }
