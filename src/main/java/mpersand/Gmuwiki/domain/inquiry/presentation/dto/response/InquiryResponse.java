@@ -17,6 +17,8 @@ public class InquiryResponse {
 
     private String title;
 
+    private String content;
+
     private LocalDateTime createdDate;
 
     private InquiryType inquiryType;
@@ -26,6 +28,7 @@ public class InquiryResponse {
         return InquiryResponse.builder()
                 .id(inquiry.getId())
                 .title(inquiry.getTitle())
+                .content(inquiry.getContent())
                 .createdDate(inquiry.getCreatedDate())
                 .inquiryType(inquiry.getInquiryType())
                 .build();
