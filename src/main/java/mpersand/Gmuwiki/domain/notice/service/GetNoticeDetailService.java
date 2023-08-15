@@ -8,7 +8,7 @@ import mpersand.Gmuwiki.global.util.NoticeUtil;
 
 @RequiredArgsConstructor
 @ReadOnlyService
-public class OneNoticeService {
+public class GetNoticeDetailService {
 
     private final NoticeUtil noticeUtil;
 
