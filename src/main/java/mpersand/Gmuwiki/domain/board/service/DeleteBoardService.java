@@ -6,6 +6,7 @@ import mpersand.Gmuwiki.domain.board.exception.BoardAuthorMismatchException;
 import mpersand.Gmuwiki.domain.board.repository.BoardRecordRepository;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
+import mpersand.Gmuwiki.domain.user.enums.Role;
 import mpersand.Gmuwiki.global.annotation.RollbackService;
 import mpersand.Gmuwiki.global.util.BoardUtil;
 import mpersand.Gmuwiki.global.util.UserUtil;
@@ -28,7 +29,7 @@ public class DeleteBoardService {
 
         User user = userUtil.currentUser();
 
-        if(!(board.getUser() == user)) {
+        if(!(board.getUser() == user) && user.getRole().equals(Role.ROLE_STUDENT)) {
 
             throw new BoardAuthorMismatchException();
         }
