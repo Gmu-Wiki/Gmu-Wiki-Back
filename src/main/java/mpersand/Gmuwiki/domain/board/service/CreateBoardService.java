@@ -2,10 +2,12 @@ package mpersand.Gmuwiki.domain.board.service;
 
 import lombok.RequiredArgsConstructor;
 import mpersand.Gmuwiki.domain.board.entity.Board;
+import mpersand.Gmuwiki.domain.board.entity.BoardRecord;
 import mpersand.Gmuwiki.domain.board.enums.BoardDetailType;
 import mpersand.Gmuwiki.domain.board.enums.BoardType;
 import mpersand.Gmuwiki.domain.board.exception.ExistTitleException;
 import mpersand.Gmuwiki.domain.board.presentation.dto.request.CreateBoardRequest;
+import mpersand.Gmuwiki.domain.board.repository.BoardRecordRepository;
 import mpersand.Gmuwiki.domain.board.repository.BoardRepository;
 import mpersand.Gmuwiki.domain.user.entity.User;
 import mpersand.Gmuwiki.global.annotation.RollbackService;
@@ -20,6 +22,8 @@ public class CreateBoardService {
     private final UserUtil userUtil;
 
     private final BoardRepository boardRepository;
+
+    private final BoardRecordRepository boardRecordRepository;
 
     public void execute(CreateBoardRequest createBoardRequest) {
 
@@ -40,6 +44,17 @@ public class CreateBoardService {
                 .editedDate(LocalDateTime.now())
                 .build();
 
+        BoardRecord boardRecord = BoardRecord.builder()
+                .title(board.getTitle())
+                .content(board.getContent())
+                .name(board.getName())
+                .boardType(board.getBoardType())
+                .createdDate(board.getCreatedDate())
+                .board(board)
+                .build();
+
         boardRepository.save(board);
+
+        boardRecordRepository.save(boardRecord);
     }
 }
