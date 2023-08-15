@@ -6,6 +6,7 @@ import mpersand.Gmuwiki.global.filter.JwtRequestFilter;
 import mpersand.Gmuwiki.global.logger.filter.LogRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -35,8 +36,15 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .antMatchers("/auth/**").permitAll()
-                .antMatchers("/file/**").hasAnyAuthority("ROLE_STUDENT", "ROLE_ADMIN")
+
+                .antMatchers(HttpMethod.POST, "/auth").permitAll()
+                .antMatchers(HttpMethod.PATCH, "/auth").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/auth").authenticated()
+
+                .antMatchers("/file/**").authenticated()
+
+                .antMatchers("/board/**").authenticated()
+
                 .antMatchers("/user/**").hasAuthority("ROLE_STUDENT")
                 .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .anyRequest().denyAll();

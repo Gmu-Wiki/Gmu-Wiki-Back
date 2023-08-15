@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
-@RestRequestService("/admin/board")
-public class AdminBoardController {
+@RestRequestService("/board")
+public class BoardController {
 
     private final CreateBoardService createBoardService;
 
@@ -24,7 +24,7 @@ public class AdminBoardController {
 
     private final GetBoardDetailService getBoardDetailService;
 
-    private final DeleteBoardAdminService deleteBoardAdminService;
+    private final DeleteBoardService deleteBoardService;
 
     private final EditBoardService editBoardService;
 
@@ -80,7 +80,7 @@ public class AdminBoardController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        deleteBoardAdminService.execute(id);
+        deleteBoardService.execute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
