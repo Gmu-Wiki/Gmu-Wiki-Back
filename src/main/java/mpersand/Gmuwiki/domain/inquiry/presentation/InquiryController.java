@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
-@RestRequestService("/admin/inquiry")
-public class AdminInquiryController {
+@RestRequestService("/inquiry")
+public class InquiryController {
 
     private final CreateInquiryService createInquiryService;
 
