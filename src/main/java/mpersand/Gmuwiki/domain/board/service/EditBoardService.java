@@ -38,17 +38,16 @@ public class EditBoardService {
         }
 
         BoardRecord boardRecord = BoardRecord.builder()
-                .title(board.getTitle())
-                .content(board.getContent())
-                .name(board.getName())
+                .title(editBoardRequest.getTitle())
+                .content(editBoardRequest.getContent())
+                .name(user.getName())
                 .boardType(board.getBoardType())
-                .createdDate(board.getCreatedDate())
-                .editedDate(board.getEditedDate())
+                .createdDate(board.getEditedDate())
                 .board(board)
                 .build();
 
         boardRecordRepository.save(boardRecord);
 
-        board.update(editBoardRequest, user.getName());
+        board.update(editBoardRequest);
     }
 }
