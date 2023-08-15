@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
-@RestRequestService("/user/board")
-public class UserBoardController {
+@RestRequestService("/board")
+public class BoardController {
 
     private final CreateBoardService createBoardService;
 
