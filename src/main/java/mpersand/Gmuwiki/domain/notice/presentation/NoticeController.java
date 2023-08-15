@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
-@RestRequestService("/admin/notice")
-public class AdminNoticeController {
+@RestRequestService("/notice")
+public class NoticeController {
 
     private final ListNoticeService listNoticeService;
-    private final OneNoticeService oneNoticeService;
+    private final GetNoticeDetailService getNoticeDetailService;
     private final CreateNoticeService createNoticeService;
     private final EditNoticeService editNoticeService;
     private final DeleteNoticeService deleteNoticeService;
@@ -31,7 +31,7 @@ public class AdminNoticeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<NoticeDetailResponse> findOne(@PathVariable("id") Long id){
-        NoticeDetailResponse oneFindById = oneNoticeService.execute(id);
+        NoticeDetailResponse oneFindById = getNoticeDetailService.execute(id);
         return new ResponseEntity<>(oneFindById,HttpStatus.OK);
     }
 
