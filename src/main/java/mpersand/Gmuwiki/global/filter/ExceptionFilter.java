@@ -50,6 +50,7 @@ public class ExceptionFilter extends OncePerRequestFilter {
         } catch (Exception ex) {
             log.debug("================= [ ExceptionHandlerFilter ] 에서 Exception 발생 ===================");
             setErrorResponse(UNKNOWN_ERROR, response);
+            ex.printStackTrace();
         }
     }
 }
