@@ -23,7 +23,6 @@ public class GetBoardRecordDetailService {
                 .title(boardRecord.getTitle())
                 .content(boardRecord.getContent())
                 .createdDate(boardRecord.getCreatedDate())
-                .editedDate(boardRecord.getEditedDate())
                 .build();
 
         return detailBoardResponse;
