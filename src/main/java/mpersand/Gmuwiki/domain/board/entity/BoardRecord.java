@@ -3,7 +3,6 @@ package mpersand.Gmuwiki.domain.board.entity;
 import lombok.*;
 import mpersand.Gmuwiki.domain.board.enums.BoardType;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -40,7 +39,4 @@ public class BoardRecord {
 
     @CreatedDate
     private LocalDateTime createdDate;
-
-    @LastModifiedDate
-    private LocalDateTime editedDate;
 }

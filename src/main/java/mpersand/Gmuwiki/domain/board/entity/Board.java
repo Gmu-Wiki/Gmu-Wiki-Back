@@ -50,9 +50,8 @@ public class Board {
     @LastModifiedDate
     private LocalDateTime editedDate;
 
-    public void update(EditBoardRequest editBoardRequest, String name) {
+    public void update(EditBoardRequest editBoardRequest) {
         this.title = editBoardRequest.getTitle();
         this.content = editBoardRequest.getContent();
-        this.name = name;
     }
 }
