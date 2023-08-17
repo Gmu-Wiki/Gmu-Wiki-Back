@@ -57,7 +57,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PATCH, "/notice/{id}").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/notice/{id}").hasAuthority("ROLE_ADMIN")
 
-                .antMatchers("/role").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/role/**").hasAuthority("ROLE_ADMIN")
 
                 .anyRequest().denyAll();
 
