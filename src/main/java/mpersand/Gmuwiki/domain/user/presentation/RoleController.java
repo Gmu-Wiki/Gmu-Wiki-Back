@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
-@RestRequestService("/admin/role")
+@RestRequestService("/role")
 public class RoleController {
 
     private final AdminRoleChangeService adminRoleChangeService;

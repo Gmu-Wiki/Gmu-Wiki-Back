@@ -45,8 +45,20 @@ public class SecurityConfig {
 
                 .antMatchers("/board/**").authenticated()
 
-                .antMatchers("/user/**").hasAuthority("ROLE_STUDENT")
-                .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.POST, "/inquiry").authenticated()
+                .antMatchers(HttpMethod.GET, "/inquiry").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.GET, "/inquiry/{id}").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.POST, "/inquiry/approve/{id}").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.POST, "/inquiry/refusal/{id}").hasAuthority("ROLE_ADMIN")
+
+                .antMatchers(HttpMethod.GET, "/notice").authenticated()
+                .antMatchers(HttpMethod.GET, "/notice/{id}").authenticated()
+                .antMatchers(HttpMethod.POST, "/notice").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/notice/{id}").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/notice/{id}").hasAuthority("ROLE_ADMIN")
+
+                .antMatchers("/role").hasAuthority("ROLE_ADMIN")
+
                 .anyRequest().denyAll();
 
         http
