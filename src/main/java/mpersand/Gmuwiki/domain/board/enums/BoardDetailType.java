@@ -8,7 +8,7 @@ public enum BoardDetailType {
     GENERAL, SPECIALITY, OTHER,
     MAJOR, CA,
     MAJORS,
-    TWENTY_SECOND, TWENTY_THIRD,
+    TWENTY_FIRST, TWENTY_SECOND, TWENTY_THIRD,
     JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEPT, OCT, NOV, DEC;
 
     @JsonCreator
