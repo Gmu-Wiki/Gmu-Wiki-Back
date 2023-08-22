@@ -26,13 +26,13 @@ public class User {
     @Column(name = "student_name" , nullable = false)
     private String name;
 
-    @Column(name = "grade" , nullable = false)
+    @Column(name = "grade")
     private int grade;
 
-    @Column(name = "class_num" , nullable = false)
+    @Column(name = "class_num")
     private int classNum;
 
-    @Column(name = "student_num" , nullable = false)
+    @Column(name = "student_num")
     private int stuNum;
 
     @Column(name = "role")
