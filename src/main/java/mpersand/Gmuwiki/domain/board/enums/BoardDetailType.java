@@ -9,7 +9,8 @@ public enum BoardDetailType {
     MAJOR, CA,
     MAJORS,
     TWENTY_FIRST, TWENTY_SECOND, TWENTY_THIRD,
-    JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEPT, OCT, NOV, DEC;
+    JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEPT, OCT, NOV, DEC,
+    TEAM, INDIVIDUAL;
 
     @JsonCreator
     public static BoardDetailType from(String s) { return BoardDetailType.valueOf(s.toUpperCase()); }
