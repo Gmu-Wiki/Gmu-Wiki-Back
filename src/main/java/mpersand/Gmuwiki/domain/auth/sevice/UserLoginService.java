@@ -49,10 +49,10 @@ public class UserLoginService {
         ZonedDateTime refreshExp = tokenProvider.refreshExpiredTime();
 
         if(role == Role.ROLE_ADMIN) {
-
             createAdminOrRefreshToken(gAuthUserInfo, refreshToken);
+        } else if (role == Role.ROLE_GRADUATE) {
+            createGraduateOrRefreshToken(gAuthUserInfo, refreshToken);
         } else {
-
             createUserOrRefreshToken(gAuthUserInfo, refreshToken);
         }
 
@@ -80,6 +80,8 @@ public class UserLoginService {
                     return Role.ROLE_STUDENT;
                 case "ROLE_ADMIN":
                     return Role.ROLE_ADMIN;
+                case "ROLE_GRADUATE":
+                    return Role.ROLE_GRADUATE;
                 default:
                     throw new RoleNotExistException();
             }
@@ -99,6 +101,19 @@ public class UserLoginService {
         if(userInfo == null) {
 
             authUtil.saveNewUser(gAuthUserInfo, refreshToken);
+        } else {
+
+            authUtil.saveNewRefreshToken(userInfo, refreshToken);
+        }
+    }
+
+    private void createGraduateOrRefreshToken(GAuthUserInfo gAuthUserInfo, String refreshToken) {
+
+        User userInfo = userRepository.findUserByEmail(gAuthUserInfo.getEmail());
+
+        if(userInfo == null) {
+
+            authUtil.saveNewGraduate(gAuthUserInfo, refreshToken);
         } else {
 
             authUtil.saveNewRefreshToken(userInfo, refreshToken);

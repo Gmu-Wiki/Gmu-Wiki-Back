@@ -27,6 +27,15 @@ public class AuthUtil {
         saveNewRefreshToken(signInUserInfo, refreshToken);
     }
 
+    public void saveNewGraduate(GAuthUserInfo gAuthUserInfo, String refreshToken) {
+
+        User signInGraduateInfo = authConverter.toGraduateEntity(gAuthUserInfo);
+
+        userRepository.save(signInGraduateInfo);
+
+        saveNewRefreshToken(signInGraduateInfo, refreshToken);
+    }
+
     public void saveNewAdmin(GAuthUserInfo gAuthUserInfo, String refreshToken) {
 
         User signInAdminInfo = authConverter.toAdminEntity(gAuthUserInfo);
