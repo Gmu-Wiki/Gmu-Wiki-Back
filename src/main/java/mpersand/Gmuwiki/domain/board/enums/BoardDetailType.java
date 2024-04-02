@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum BoardDetailType {
 
-    FIFTH, SIXTH, SEVENTH,
+    FIFTH, SIXTH, SEVENTH, EIGHTH,
     GENERAL, SPECIALITY, OTHER,
     MAJOR, CA,
     MAJORS,
-    TWENTY_FIRST, TWENTY_SECOND, TWENTY_THIRD,
+    TWENTY_FIRST, TWENTY_SECOND, TWENTY_THIRD, TWENTY_FOURTH,
     JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEPT, OCT, NOV, DEC,
     TEAM, INDIVIDUAL;
 
