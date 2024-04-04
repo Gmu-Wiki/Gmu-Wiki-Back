@@ -43,7 +43,16 @@ public class SecurityConfig {
 
                 .antMatchers("/file/**").authenticated()
 
-                .antMatchers("/board/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/board").authenticated()
+                .antMatchers(HttpMethod.GET, "/board/search").authenticated()
+                .antMatchers(HttpMethod.GET, "/board/recent").authenticated()
+                .antMatchers(HttpMethod.GET, "/board").authenticated()
+                .antMatchers(HttpMethod.GET, "/board/{id}/record").authenticated()
+                .antMatchers(HttpMethod.GET, "/board/{id}/record/detail").authenticated()
+                .antMatchers(HttpMethod.GET, "/board/{id}").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/board/{id}").authenticated()
+                .antMatchers(HttpMethod.PATCH, "/board/{id}").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/board/{id}/record").hasAuthority("ROLE_ADMIN")
 
                 .antMatchers(HttpMethod.POST, "/inquiry").authenticated()
                 .antMatchers(HttpMethod.GET, "/inquiry").hasAuthority("ROLE_ADMIN")
