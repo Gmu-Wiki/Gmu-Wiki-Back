@@ -36,6 +36,8 @@ public class BoardController {
 
     private final ListRecentEditBoardService listRecentEditBoardService;
 
+    private final DeleteBoardRecordService deleteBoardRecordService;
+
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest) {
         createBoardService.execute(createBoardRequest);
@@ -81,6 +83,12 @@ public class BoardController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         deleteBoardService.execute(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/{id}/record")
+    public ResponseEntity<Void> deleteBoardRecord(@PathVariable Long id) {
+        deleteBoardRecordService.execute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
