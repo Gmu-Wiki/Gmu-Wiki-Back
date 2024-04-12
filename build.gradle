@@ -64,7 +64,7 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 
 	//gauth
-	implementation 'com.github.GSM-MSG:GAuth-SDK-Java:v2.0.0'
+	implementation 'com.github.GSM-MSG:GAuth-SDK-Java:v3.0.0'
 
 	//webhook
 	implementation 'com.squareup.okhttp3:okhttp:4.9.1'
